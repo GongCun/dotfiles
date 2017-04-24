@@ -120,6 +120,23 @@ Case-sensitive."
 	(end (point)))
     (delete-region beg end)))
 
+(defun vi-yank-range(start end)
+  "Yank lines from start to end"
+  (interactive "nBegin #line: \nnEnd #line: ")
+  (save-excursion
+    (goto-line start)
+    (setq BEG (point))
+    (goto-line end)
+    (setq END (line-end-position))
+    (kill-ring-save BEG END)))
+
+(defun vi-paste-line ()
+  "Paste lines in newline"
+  (interactive)
+  (end-of-line)
+  (newline)
+  (yank))
+
 (global-set-key "\C-\M-o" 'vi-open-line-above)
 (global-set-key "\C-o" 'vi-open-line-below)
 (global-set-key "\C-cd0" 'vi-remove-to-begin)
@@ -128,6 +145,10 @@ Case-sensitive."
 (global-set-key "\C-cdt" 'kill-to-pre-char)
 (global-set-key "\C-cj" 'vi-join-line)
 (global-set-key "\C-cyy" 'vi-copy-line)
+(global-set-key "\C-cyr" 'vi-yank-range)
+(global-set-key "\C-cp" 'vi-paste-line)
+(global-set-key "\C-cg" 'goto-line)
+(global-set-key "\C-c." 'repeat)
 
 ;; Hide the welcome screen and startup message
 (setq inhibit-startup-screen t)
