@@ -118,7 +118,7 @@ Case-sensitive."
   (interactive)
   (let ((beg (line-beginning-position))
 	(end (point)))
-    (delete-region beg end)))
+    (kill-region beg end)))
 
 (defun vi-yank-range(start end)
   "Yank lines from start to end"
@@ -137,18 +137,93 @@ Case-sensitive."
   (newline)
   (yank))
 
+(defun vi-remove-range(start end)
+  "Remove lines from start to end, if start > end, switch the two values."
+  (interactive "nBegin #line: \nnEnd #line: ")
+  (save-excursion
+    (if (> start end)
+        (progn
+          (setq tmp start)
+          (setq start end)
+          (setq end tmp)))
+    (goto-line start)
+    (setq BEG (point))
+    (goto-line end)
+    (setq END (line-end-position))
+    (kill-region BEG END)
+    (setq lines (+ (- end start) 1))
+    (message "%d line%s removed" lines (if (= 1 lines) "" "s"))))
+
+
+(defun vi-yank-range(start end)
+  "Yank lines from start to end, if start > end, switch the two values."
+  (interactive "nBegin #line: \nnEnd #line: ")
+  (save-excursion
+    (if (> start end)
+        (progn
+          (setq tmp start)
+          (setq start end)
+          (setq end tmp)))
+    (goto-line start)
+    (setq BEG (point))
+    (goto-line end)
+    (setq END (line-end-position))
+    (kill-ring-save BEG END)
+    (setq lines (+ (- end start) 1))
+    (message "%d line%s copied" lines (if (= 1 lines) "" "s"))))
+
+(defun vi-remove-to-end-of-buffer ()
+  "Remove from current line to the end of buffer"
+  (interactive)
+  (let ((beg (line-beginning-position))
+        (end (point-max)))
+    (kill-region beg end)))
+
+(defun vi-remove-to-begin-of-buffer ()
+  "Remove from begin of buffer to current line"
+  (interactive)
+  (let ((beg (point-min))
+        (end (line-end-position)))
+    (kill-region beg end)))
+
+;; Move to dipalyed line functions
+(defun move-to-window-bottom ()
+    (interactive)
+    (move-to-window-line -1))
+
+(defun move-to-window-top ()
+    (interactive)
+    (move-to-window-line 0))
+
+(defun window-half-height ()
+    (max 1 (/ (1- (window-height (selected-window))) 2)))
+
+(defun move-to-window-middle ()
+    (interactive)
+    (move-to-window-line (window-half-height)))
+
+
 (global-set-key "\C-\M-o" 'vi-open-line-above)
 (global-set-key "\C-o" 'vi-open-line-below)
 (global-set-key "\C-cd0" 'vi-remove-to-begin)
+(global-set-key "\C-cdG" 'vi-remove-to-end-of-buffer)
+(global-set-key "\C-cdg" 'vi-remove-to-begin-of-buffer)
 (global-set-key "\C-cdd" 'kill-current-line)
 (global-set-key "\C-cdf" 'kill-to-char)
 (global-set-key "\C-cdt" 'kill-to-pre-char)
 (global-set-key "\C-cj" 'vi-join-line)
 (global-set-key "\C-cyy" 'vi-copy-line)
-(global-set-key "\C-cyr" 'vi-yank-range)
+(global-set-key "\C-cry" 'vi-yank-range)
+(global-set-key "\C-crd" 'vi-remove-range)
 (global-set-key "\C-cp" 'vi-paste-line)
 (global-set-key "\C-cg" 'goto-line)
 (global-set-key "\C-c." 'repeat)
+(global-set-key "\C-cm" 'point-to-register)
+(global-set-key "\C-c`" 'jump-to-register)
+(global-set-key "\C-cH" 'move-to-window-top)
+(global-set-key "\C-cL" 'move-to-window-bottom)
+(global-set-key "\C-cM" 'move-to-window-middle)
+
 
 ;; Hide the welcome screen and startup message
 (setq inhibit-startup-screen t)
