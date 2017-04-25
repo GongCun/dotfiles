@@ -13,6 +13,13 @@
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/"))
+
+(setq url-proxy-services
+  '(("no_proxy". "^\\(localhost\\)")
+    ("http" . "proxysvr.bocmo.com:8080")
+    ("https" . "proxysvr.bocmo.com:8080")))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -202,6 +209,32 @@ Case-sensitive."
     (interactive)
     (move-to-window-line (window-half-height)))
 
+(defun vi-move-to-char(ch)
+  "Move to the certain character"
+  (interactive "cchar: ")
+  (setq savep (point))
+  (forward-char) ;; Don't include the starting position
+  (while (and (not (eq (point) (line-end-position)))
+	      (not (eq ch (char-after))))
+    (forward-char))
+  (if (eq (point) (line-end-position))
+      (progn
+	(goto-char savep)
+	(message "can't find the character!"))))
+    
+(defun vi-move-to-previous-char(ch)
+  "Move to the previous certain character"
+  (interactive "cchar: ")
+  (setq savep (point))
+  (backward-char) ;; Don't include the starting position
+  (while (and (not (eq (point) (line-beginning-position)))
+	      (not (eq ch (char-after))))
+    (backward-char))
+  (if (eq (point) (line-beginning-position))
+      (progn
+	(goto-char savep)
+	(message "can't find the character!"))))
+
 
 (global-set-key "\C-\M-o" 'vi-open-line-above)
 (global-set-key "\C-o" 'vi-open-line-below)
@@ -218,17 +251,27 @@ Case-sensitive."
 (global-set-key "\C-cp" 'vi-paste-line)
 (global-set-key "\C-cg" 'goto-line)
 (global-set-key "\C-c." 'repeat)
-(global-set-key "\C-cm" 'point-to-register)
-(global-set-key "\C-c`" 'jump-to-register)
+;;(global-set-key "\C-cm" 'point-to-register)
+;;(global-set-key "\C-c`" 'jump-to-register)
+(global-set-key "\C-cm" 'bookmark-set)
+(global-set-key "\C-c`" 'bookmark-jump)
 (global-set-key "\C-cH" 'move-to-window-top)
 (global-set-key "\C-cL" 'move-to-window-bottom)
 (global-set-key "\C-cM" 'move-to-window-middle)
-
+(global-set-key "\C-cf" 'vi-move-to-char)
+(global-set-key "\C-ct" 'vi-move-to-previous-char)
+(global-set-key "\C-c!" 'shell-command)
 
 ;; Hide the welcome screen and startup message
 (setq inhibit-startup-screen t)
 (setq inhibit-startup-message t)
 (setq initial-scratch-message nil)
+
+;; Move to beginning or end of buffer
+(global-set-key (kbd "\C-c <up>") 'beginning-of-buffer)
+(global-set-key (kbd "\C-c <down>") 'end-of-buffer)
+(global-set-key (kbd "\C-c <left>") 'move-beginning-of-line)
+(global-set-key (kbd "\C-c <right>") 'move-end-of-line)
 
 
 ;; Add ispell-mode
@@ -248,10 +291,18 @@ Case-sensitive."
  '(compile-command "make ")
  '(custom-enabled-themes (quote (tsdh-dark)))
  '(custom-safe-themes (quote ("46ac0485dd25a2bc40caec7d70952020f890c583de5552aeb567f63f4afe6d13" default)))
- '(exec-path (quote ("C:Program Files (x86)/aspell/bin" "c:/Program Files (x86)/Common Files/NetSarang" "C:/Program Files (x86)/Intel/iCLS Client/" "C:/Program Files/Intel/iCLS Client/" "C:/windows/system32" "C:/windows" "C:/windows/System32/Wbem" "C:/windows/System32/WindowsPowerShell/v1.0/" "C:/Program Files (x86)/QuickTime/QTSystem/" "C:/Program Files/Intel/Intel(R) Management Engine Components/DAL" "C:/Program Files/Intel/Intel(R) Management Engine Components/IPT" "C:/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL" "C:/Program Files (x86)/Intel/Intel(R) Management Engine Components/IPT" "C:/Program Files (x86)/Intel/OpenCL SDK/3.0/bin/x86" "C:/Program Files (x86)/Intel/OpenCL SDK/3.0/bin/x64" "C:/PROGRA~1/SQLLIB/BIN" "C:/PROGRA~1/SQLLIB/FUNCTION" "C:/Program Files (x86)/IBM/Personal Communications/" "C:/Program Files (x86)/IBM/Trace Facility/" "C:/Program Files/Microsoft/Web Platform Installer/" "C:/Program Files (x86)/Microsoft ASP.NET/ASP.NET Web Pages/v1.0/" "C:/Program Files (x86)/Windows Kits/8.0/Windows Performance Toolkit/" "C:/Program Files/Microsoft SQL Server/110/Tools/Binn/" "C:/Program Files/Git/cmd" "c:/Program Files/emacs-24.3/bin" "c:/Program Files/emacs-24.3/lib-src/oo-spd/i386" "c:/Program Files/emacs-24.3/lib-src/oo/i386")))
+ '(exec-path (quote ("C:/Program Files (x86)/aspell/bin" "c:/Program Files (x86)/Common Files/NetSarang" "C:/Program Files (x86)/Intel/iCLS Client/" "C:/Program Files/Intel/iCLS Client/" "C:/windows/system32" "C:/windows" "C:/windows/System32/Wbem" "C:/windows/System32/WindowsPowerShell/v1.0/" "C:/Program Files (x86)/QuickTime/QTSystem/" "C:/Program Files/Intel/Intel(R) Management Engine Components/DAL" "C:/Program Files/Intel/Intel(R) Management Engine Components/IPT" "C:/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL" "C:/Program Files (x86)/Intel/Intel(R) Management Engine Components/IPT" "C:/Program Files (x86)/Intel/OpenCL SDK/3.0/bin/x86" "C:/Program Files (x86)/Intel/OpenCL SDK/3.0/bin/x64" "C:/PROGRA~1/SQLLIB/BIN" "C:/PROGRA~1/SQLLIB/FUNCTION" "C:/Program Files (x86)/IBM/Personal Communications/" "C:/Program Files (x86)/IBM/Trace Facility/" "C:/Program Files/Microsoft/Web Platform Installer/" "C:/Program Files (x86)/Microsoft ASP.NET/ASP.NET Web Pages/v1.0/" "C:/Program Files (x86)/Windows Kits/8.0/Windows Performance Toolkit/" "C:/Program Files/Microsoft SQL Server/110/Tools/Binn/" "C:/Program Files/Git/cmd" "c:/Program Files/emacs-24.3/bin" "c:/Program Files/emacs-24.3/lib-src/oo-spd/i386" "c:/Program Files/emacs-24.3/lib-src/oo/i386")))
  '(package-selected-packages (quote (auto-complete))))
 
 
 ;; Move to beginning or end of buffer
 (global-set-key (kbd "C-c <home>") 'beginning-of-buffer)
 (global-set-key (kbd "C-c <end>") 'end-of-buffer)
+
+;; UTF-8 as default encoding
+;; (set-language-environment "UTF-8")
+
+;; For markdown-mode
+(setq markdown-command
+      "C:\\Program\ Files\\multimarkdown_5.3.0\\bin\\multimarkdown")
+
