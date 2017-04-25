@@ -291,7 +291,7 @@ Case-sensitive."
  '(compile-command "make ")
  '(custom-enabled-themes (quote (tsdh-dark)))
  '(custom-safe-themes (quote ("46ac0485dd25a2bc40caec7d70952020f890c583de5552aeb567f63f4afe6d13" default)))
- '(exec-path (quote ("C:/Program Files (x86)/aspell/bin" "c:/Program Files (x86)/Common Files/NetSarang" "C:/Program Files (x86)/Intel/iCLS Client/" "C:/Program Files/Intel/iCLS Client/" "C:/windows/system32" "C:/windows" "C:/windows/System32/Wbem" "C:/windows/System32/WindowsPowerShell/v1.0/" "C:/Program Files (x86)/QuickTime/QTSystem/" "C:/Program Files/Intel/Intel(R) Management Engine Components/DAL" "C:/Program Files/Intel/Intel(R) Management Engine Components/IPT" "C:/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL" "C:/Program Files (x86)/Intel/Intel(R) Management Engine Components/IPT" "C:/Program Files (x86)/Intel/OpenCL SDK/3.0/bin/x86" "C:/Program Files (x86)/Intel/OpenCL SDK/3.0/bin/x64" "C:/PROGRA~1/SQLLIB/BIN" "C:/PROGRA~1/SQLLIB/FUNCTION" "C:/Program Files (x86)/IBM/Personal Communications/" "C:/Program Files (x86)/IBM/Trace Facility/" "C:/Program Files/Microsoft/Web Platform Installer/" "C:/Program Files (x86)/Microsoft ASP.NET/ASP.NET Web Pages/v1.0/" "C:/Program Files (x86)/Windows Kits/8.0/Windows Performance Toolkit/" "C:/Program Files/Microsoft SQL Server/110/Tools/Binn/" "C:/Program Files/Git/cmd" "c:/Program Files/emacs-24.3/bin" "c:/Program Files/emacs-24.3/lib-src/oo-spd/i386" "c:/Program Files/emacs-24.3/lib-src/oo/i386")))
+ '(exec-path (quote ("C:/Program Files (x86)/aspell/bin" "c:/Program Files (x86)/Common Files/NetSarang" "C:/Program Files (x86)/Intel/iCLS Client/" "C:/Program Files/Intel/iCLS Client/" "C:/windows/system32" "C:/windows" "C:/windows/System32/Wbem" "C:/windows/System32/WindowsPowerShell/v1.0/" "C:/Program Files (x86)/QuickTime/QTSystem/" "C:/Program Files/Intel/Intel(R) Management Engine Components/DAL" "C:/Program Files/Intel/Intel(R) Management Engine Components/IPT" "C:/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL" "C:/Program Files (x86)/Intel/Intel(R) Management Engine Components/IPT" "C:/Program Files (x86)/Intel/OpenCL SDK/3.0/bin/x86" "C:/Program Files (x86)/Intel/OpenCL SDK/3.0/bin/x64" "C:/PROGRA~1/SQLLIB/BIN" "C:/PROGRA~1/SQLLIB/FUNCTION" "C:/Program Files (x86)/IBM/Personal Communications/" "C:/Program Files (x86)/IBM/Trace Facility/" "C:/Program Files/Microsoft/Web Platform Installer/" "C:/Program Files (x86)/Microsoft ASP.NET/ASP.NET Web Pages/v1.0/" "C:/Program Files (x86)/Windows Kits/8.0/Windows Performance Toolkit/" "C:/Program Files/Microsoft SQL Server/110/Tools/Binn/" "C:/Program Files/Git/cmd" "c:/Program Files/emacs-24.3/bin" "c:/Program Files/emacs-24.3/lib-src/oo-spd/i386" "c:/Program Files/emacs-24.3/lib-src/oo/i386" "C:/Program Files/multimarkdown_5.3.0/bin")))
  '(package-selected-packages (quote (auto-complete))))
 
 
@@ -300,9 +300,9 @@ Case-sensitive."
 (global-set-key (kbd "C-c <end>") 'end-of-buffer)
 
 ;; UTF-8 as default encoding
-;; (set-language-environment "UTF-8")
+(set-language-environment "UTF-8")
 
 ;; For markdown-mode
-(setq markdown-command
-      "C:\\Program\ Files\\multimarkdown_5.3.0\\bin\\multimarkdown")
+(setq markdown-command "multimarkdown")
+      
 
