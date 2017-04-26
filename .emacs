@@ -307,4 +307,11 @@ Case-sensitive."
 ;; For markdown-mode
 (setq markdown-command "multimarkdown")
       
+;; Copy from stack-overflow -- Full-line completion
+(defun vi-full-line-completion()
+  (interactive)
+  (let ((hippie-expand-try-functions-list
+         '(try-expand-line)))
+    (call-interactively 'hippie-expand)))
 
+(global-set-key "\C-c\C-l" 'vi-full-line-completion)
