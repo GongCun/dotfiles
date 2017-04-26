@@ -129,16 +129,6 @@ Case-sensitive."
 	(end (point)))
     (kill-region beg end)))
 
-(defun vi-yank-range(start end)
-  "Yank lines from start to end"
-  (interactive "nBegin #line: \nnEnd #line: ")
-  (save-excursion
-    (goto-line start)
-    (setq BEG (point))
-    (goto-line end)
-    (setq END (line-end-position))
-    (kill-ring-save BEG END)))
-
 (defun vi-paste-line ()
   "Paste lines in newline"
   (interactive)
@@ -146,40 +136,45 @@ Case-sensitive."
   (newline)
   (yank))
 
-(defun vi-remove-range(start end)
+(defun vi-remove-range(string)
   "Remove lines from start to end, if start > end, switch the two values."
-  (interactive "nBegin #line: \nnEnd #line: ")
+  (interactive "sRemove lines region: ")
   (save-excursion
-    (if (> start end)
-        (progn
-          (setq tmp start)
-          (setq start end)
-          (setq end tmp)))
-    (goto-line start)
-    (setq BEG (point))
-    (goto-line end)
-    (setq END (line-end-position))
-    (kill-region BEG END)
-    (setq lines (+ (- end start) 1))
-    (message "%d line%s removed" lines (if (= 1 lines) "" "s"))))
+    (let* ((list (split-string string "," t))
+           (start (string-to-number (nth 0 list)))
+           (end (string-to-number (nth 1 list))))
+      (if (> start end)
+          (progn
+            (setq tmp start)
+            (setq start end)
+            (setq end tmp)))
+      (goto-line start)
+      (setq BEG (point))
+      (goto-line end)
+      (setq END (line-end-position))
+      (kill-region BEG END)
+      (setq lines (+ (- end start) 1))
+      (message "%d line%s removed" lines (if (= 1 lines) "" "s")))))
 
-
-(defun vi-yank-range(start end)
+(defun vi-yank-range(string)
   "Yank lines from start to end, if start > end, switch the two values."
-  (interactive "nBegin #line: \nnEnd #line: ")
+  (interactive "sYank lines region: ")
   (save-excursion
-    (if (> start end)
-        (progn
-          (setq tmp start)
-          (setq start end)
-          (setq end tmp)))
-    (goto-line start)
-    (setq BEG (point))
-    (goto-line end)
-    (setq END (line-end-position))
-    (kill-ring-save BEG END)
-    (setq lines (+ (- end start) 1))
-    (message "%d line%s copied" lines (if (= 1 lines) "" "s"))))
+    (let* ((list (split-string string "," t))
+           (start (string-to-number (nth 0 list)))
+           (end (string-to-number (nth 1 list))))
+      (if (> start end)
+          (progn
+            (setq tmp start)
+            (setq start end)
+            (setq end tmp)))
+      (goto-line start)
+      (setq BEG (point))
+      (goto-line end)
+      (setq END (line-end-position))
+      (kill-ring-save BEG END)
+      (setq lines (+ (- end start) 1))
+      (message "%d line%s copied" lines (if (= 1 lines) "" "s")))))
 
 (defun vi-remove-to-end-of-buffer ()
   "Remove from current line to the end of buffer"
@@ -315,3 +310,20 @@ Case-sensitive."
     (call-interactively 'hippie-expand)))
 
 (global-set-key "\C-c\C-l" 'vi-full-line-completion)
+
+(defun vi-yank-to-begin ()
+  "Yank from begin of line to current point"
+  (interactive)
+  (let ((beg (line-beginning-position))
+	(end (point)))
+    (kill-ring-save beg end)))
+
+(defun vi-yank-to-end ()
+  "Yank from begin of line to current point"
+  (interactive)
+  (let ((beg (point))
+	(end (line-end-position)))
+    (kill-ring-save beg end)))
+
+(global-set-key "\C-cy0" 'vi-yank-to-begin)
+(global-set-key "\C-cy$" 'vi-yank-to-end)
