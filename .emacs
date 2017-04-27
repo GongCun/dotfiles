@@ -235,29 +235,29 @@ Case-sensitive."
 
 (global-set-key "\C-\M-o" 'vi-open-line-above)
 (global-set-key "\C-o" 'vi-open-line-below)
-(global-set-key "\C-cd0" 'vi-remove-to-begin)
-(global-set-key "\C-cdG" 'vi-remove-to-end-of-buffer)
-(global-set-key "\C-cdg" 'vi-remove-to-begin-of-buffer)
-(global-set-key "\C-cdd" 'kill-current-line)
-(global-set-key "\C-cdf" 'kill-to-char)
-(global-set-key "\C-cdt" 'kill-to-pre-char)
-(global-set-key "\C-cj" 'vi-join-line)
-(global-set-key "\C-cyy" 'vi-copy-line)
-(global-set-key "\C-cry" 'vi-yank-range)
-(global-set-key "\C-crd" 'vi-remove-range)
-(global-set-key "\C-cp" 'vi-paste-line)
-(global-set-key "\C-cg" 'goto-line)
-(global-set-key "\C-c." 'repeat)
+(global-set-key (kbd "\e\ed0") 'vi-remove-to-begin)
+(global-set-key (kbd "\e\edG") 'vi-remove-to-end-of-buffer)
+(global-set-key (kbd "\e\edg") 'vi-remove-to-begin-of-buffer)
+(global-set-key (kbd "\e\edd") 'kill-current-line)
+(global-set-key (kbd "\e\edf") 'kill-to-char)
+(global-set-key (kbd "\e\edt") 'kill-to-pre-char)
+(global-set-key (kbd "\e\ej") 'vi-join-line)
+(global-set-key (kbd "\e\eyy") 'vi-copy-line)
+(global-set-key (kbd "\e\ery") 'vi-yank-range)
+(global-set-key (kbd "\e\erd") 'vi-remove-range)
+(global-set-key (kbd "\e\ep") 'vi-paste-line)
+(global-set-key (kbd "\e\eg") 'goto-line)
+(global-set-key (kbd "\e\e.") 'repeat)
 ;;(global-set-key "\C-cm" 'point-to-register)
 ;;(global-set-key "\C-c`" 'jump-to-register)
-(global-set-key "\C-cm" 'bookmark-set)
-(global-set-key "\C-c`" 'bookmark-jump)
-(global-set-key "\C-cH" 'move-to-window-top)
-(global-set-key "\C-cL" 'move-to-window-bottom)
-(global-set-key "\C-cM" 'move-to-window-middle)
-(global-set-key "\C-cf" 'vi-move-to-char)
-(global-set-key "\C-ct" 'vi-move-to-previous-char)
-(global-set-key "\C-c!" 'shell-command)
+(global-set-key (kbd "\e\em") 'bookmark-set)
+(global-set-key (kbd "\e\e`") 'bookmark-jump)
+(global-set-key (kbd "\e\eH") 'move-to-window-top)
+(global-set-key (kbd "\e\eL") 'move-to-window-bottom)
+(global-set-key (kbd "\e\eM") 'move-to-window-middle)
+(global-set-key (kbd "\e\ef") 'vi-move-to-char)
+(global-set-key (kbd "\e\et") 'vi-move-to-previous-char)
+(global-set-key (kbd "\e\e!") 'shell-command)
 
 ;; Hide the welcome screen and startup message
 (setq inhibit-startup-screen t)
@@ -268,7 +268,7 @@ Case-sensitive."
 (global-set-key (kbd "\C-c <up>") 'beginning-of-buffer)
 (global-set-key (kbd "\C-c <down>") 'end-of-buffer)
 (global-set-key (kbd "\C-c <left>") 'move-beginning-of-line)
-(global-set-key (kbd "\C-c <right>") 'move-end-of-line)
+(global-set-key (kbd "\C-c <Right>") 'move-end-of-line)
 
 
 ;; Add ispell-mode
@@ -278,7 +278,7 @@ Case-sensitive."
 (require 'ispell)
 (setq-default flyspell-mode t)
 (global-set-key (kbd "<f9>") 'ispell-word)
-(global-set-key (kbd "C-<f9>") 'flyspell-mode)
+(global-set-key (kbd "<f10>") 'flyspell-mode)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -309,7 +309,7 @@ Case-sensitive."
          '(try-expand-line)))
     (call-interactively 'hippie-expand)))
 
-(global-set-key "\C-c\C-l" 'vi-full-line-completion)
+(global-set-key "\C-x\C-l" 'vi-full-line-completion)
 
 (defun vi-yank-to-begin ()
   "Yank from begin of line to current point"
@@ -325,5 +325,9 @@ Case-sensitive."
 	(end (line-end-position)))
     (kill-ring-save beg end)))
 
-(global-set-key "\C-cy0" 'vi-yank-to-begin)
-(global-set-key "\C-cy$" 'vi-yank-to-end)
+(global-set-key (kbd "\e\ey0") 'vi-yank-to-begin)
+(global-set-key (kbd "\e\ey$") 'vi-yank-to-end)
+
+(abbrev-mode t)
+
+(global-set-key [f12] 'linum-mode)
