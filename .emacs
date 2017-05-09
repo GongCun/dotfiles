@@ -28,7 +28,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(font-lock-comment-delimiter-face ((t (:inherit font-lock-comment-face :foreground "cyan"))))
+ '(org-footnote ((t (:foreground "peach puff" :underline t)))))
 
 (show-paren-mode)
 (setq show-paren-delay 0)
@@ -300,8 +301,11 @@ Case-sensitive."
  '(exec-path
    (quote
     ("C:/Program Files (x86)/aspell/bin" "c:/Program Files (x86)/Common Files/NetSarang" "C:/Program Files (x86)/Intel/iCLS Client/" "C:/Program Files/Intel/iCLS Client/" "C:/windows/system32" "C:/windows" "C:/windows/System32/Wbem" "C:/windows/System32/WindowsPowerShell/v1.0/" "C:/Program Files (x86)/QuickTime/QTSystem/" "C:/Program Files/Intel/Intel(R) Management Engine Components/DAL" "C:/Program Files/Intel/Intel(R) Management Engine Components/IPT" "C:/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL" "C:/Program Files (x86)/Intel/Intel(R) Management Engine Components/IPT" "C:/Program Files (x86)/Intel/OpenCL SDK/3.0/bin/x86" "C:/Program Files (x86)/Intel/OpenCL SDK/3.0/bin/x64" "C:/PROGRA~1/SQLLIB/BIN" "C:/PROGRA~1/SQLLIB/FUNCTION" "C:/Program Files (x86)/IBM/Personal Communications/" "C:/Program Files (x86)/IBM/Trace Facility/" "C:/Program Files/Microsoft/Web Platform Installer/" "C:/Program Files (x86)/Microsoft ASP.NET/ASP.NET Web Pages/v1.0/" "C:/Program Files (x86)/Windows Kits/8.0/Windows Performance Toolkit/" "C:/Program Files/Microsoft SQL Server/110/Tools/Binn/" "C:/Program Files/Git/cmd" "c:/Program Files/emacs-24.3/bin" "c:/Program Files/emacs-24.3/lib-src/oo-spd/i386" "c:/Program Files/emacs-24.3/lib-src/oo/i386" "C:/Program Files/multimarkdown_5.3.0/bin")))
+ '(org-export-with-sub-superscripts (quote {}))
  '(org-src-fontify-natively t)
  '(org-src-preserve-indentation t)
+ '(org-startup-folded nil)
+ '(org-startup-truncated t)
  '(package-selected-packages (quote (auto-complete))))
 
 
@@ -360,3 +364,17 @@ Case-sensitive."
 
 (global-unset-key [f11])
 (global-set-key [f11] 'auto-complete-mode)
+
+;; Change from 'normal' to 'emacs' using 'i' 
+(define-key evil-normal-state-map "i" 'evil-emacs-state)
+(define-key evil-normal-state-map "\C-c\C-i" 'evil-insert-state)
+(define-key evil-emacs-state-map "\C-c\C-i" 'evil-normal-state)
+
+
+(defun untabify-whole()
+  (interactive)
+  (save-excursion
+    (untabify (point-min) (point-max))))
+(global-set-key "\C-x\C-h" 'untabify-whole)
+
+(setq org-startup-indented t)
