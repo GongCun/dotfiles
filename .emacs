@@ -368,7 +368,8 @@ Case-sensitive."
 ;; Change from 'normal' to 'emacs' using 'i' 
 (define-key evil-normal-state-map "i" 'evil-emacs-state)
 (define-key evil-normal-state-map "\C-c\C-i" 'evil-insert-state)
-(define-key evil-emacs-state-map "\C-c\C-i" 'evil-normal-state)
+;; (define-key evil-emacs-state-map "\C-c\C-i" 'evil-normal-state)
+(setq evil-default-state 'emacs)
 
 
 (defun untabify-whole()
