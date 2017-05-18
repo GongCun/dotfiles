@@ -312,6 +312,7 @@ Case-sensitive."
  '(org-src-preserve-indentation t)
  '(org-startup-folded nil)
  '(org-startup-truncated t)
+ '(org-startup-with-inline-images t)
  '(package-selected-packages (quote (auto-complete))))
 
 
