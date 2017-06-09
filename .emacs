@@ -34,6 +34,11 @@
 (show-paren-mode)
 (setq show-paren-delay 0)
 
+;; (defun auto-complete-mode-maybe ()
+;;  "No maybe for you. Only AC!"
+;;  (unless (minibufferp (current-buffer))
+;;    (auto-complete-mode 1)))
+
 (ac-config-default)
 
 (setq-default file-column 78)
@@ -45,15 +50,25 @@
 (global-set-key "\C-xt" 'visit-tags-table)
 (global-set-key [f8] 'compile)
 
+(defun set-c-toggle-auto-hungry-state()
+  (c-toggle-auto-hungry-state 1))
+
 (add-hook 'c-mode-hook
-	  '(lambda ( )
-	     (c-set-style "linux")
-	     (c-toggle-auto-hungry-state)))
+	  (lambda ()
+	    (c-set-style "linux")
+	    (flyspell-prog-mode)
+	    ))
+(add-hook 'c-mode-hook 'set-c-toggle-auto-hungry-state)
 
 (add-hook 'c++-mode-hook
-	  '(lambda ( )
-	     (c-set-style "Stroustrup")
-	     (c-toggle-auto-hungry-state)))
+	  (lambda ()
+	    (c-set-style "Stroustrup")
+	    (flyspell-prog-mode)
+	    ))
+(add-hook 'c++-mode-hook 'set-c-toggle-auto-hungry-state)
+
+(add-hook 'shell-script-mode-hook
+	  (lambda () (flyspell-prog-mode)))
 
 (global-linum-mode t)
 (setq linum-format "%5d ")
@@ -293,6 +308,9 @@ Case-sensitive."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ac-modes
+   (quote
+    (emacs-lisp-mode lisp-mode lisp-interaction-mode slime-repl-mode nim-mode c-mode cc-mode c++-mode objc-mode swift-mode go-mode java-mode malabar-mode clojure-mode clojurescript-mode scala-mode scheme-mode ocaml-mode tuareg-mode coq-mode haskell-mode agda-mode agda2-mode perl-mode cperl-mode python-mode ruby-mode lua-mode tcl-mode ecmascript-mode javascript-mode js-mode js-jsx-mode js2-mode js2-jsx-mode coffee-mode php-mode css-mode scss-mode less-css-mode elixir-mode makefile-mode sh-mode fortran-mode f90-mode ada-mode xml-mode sgml-mode web-mode ts-mode sclang-mode verilog-mode qml-mode apples-mode text-mode evil-mode org-mode shell-script-mode)))
  '(compile-command "make ")
  '(custom-enabled-themes (quote (tsdh-dark)))
  '(custom-safe-themes
@@ -365,18 +383,22 @@ Case-sensitive."
 
 (global-set-key [f12] 'linum-mode)
 
+(setq evil-toggle-key "")
 (require 'evil)
-(evil-mode 1)
+;; (evil-mode 1)
 (global-set-key [f7] 'evil-mode)
 
+(require 'auto-complete)
+(global-auto-complete-mode t)
 (global-unset-key [f11])
 (global-set-key [f11] 'auto-complete-mode)
 
+
 ;; Change from 'normal' to 'emacs' using 'i' 
-(define-key evil-normal-state-map "i" 'evil-emacs-state)
-(define-key evil-normal-state-map "\C-c\C-i" 'evil-insert-state)
-;; (define-key evil-emacs-state-map "\C-c\C-i" 'evil-normal-state)
-(setq evil-default-state 'emacs)
+;; (define-key evil-normal-state-map "i" 'evil-emacs-state)
+;; (define-key evil-normal-state-map "\C-c\C-i" 'evil-insert-state)
+;;;; (define-key evil-emacs-state-map "\C-c\C-i" 'evil-normal-state)
+;; (setq evil-default-state 'emacs)
 
 
 (defun untabify-whole()
@@ -386,3 +408,17 @@ Case-sensitive."
 (global-set-key "\C-x\C-h" 'untabify-whole)
 
 (setq org-startup-indented t)
+
+(require 'dired)
+(define-key dired-mode-map "c" 'find-file)
+
+(global-set-key (kbd "\C-xI") 'insert-buffer)
+
+;; (add-to-list 'ac-modes '(org-mode shell-script-mode))
+
+(setq ispell-dictionary "english")
+
+(global-unset-key (kbd "\C-xz"))
+(global-set-key (kbd "\C-xzz") 'kill-emacs)
+
+;; (desktop-save-mode 1)
