@@ -9,7 +9,7 @@
 
 (setq default-major-mode 'text-mode)
 
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
+;; (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
@@ -29,6 +29,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(font-lock-comment-delimiter-face ((t (:inherit font-lock-comment-face :foreground "cyan"))))
+ '(mode-line ((t (:background "gray30" :box (:line-width 1 :color "red") :family "DejaVu Sans Mono-10"))))
  '(org-footnote ((t (:foreground "peach puff" :underline t)))))
 
 (show-paren-mode)
@@ -50,25 +51,29 @@
 (global-set-key "\C-xt" 'visit-tags-table)
 (global-set-key [f8] 'compile)
 
-(defun set-c-toggle-auto-hungry-state()
-  (c-toggle-auto-hungry-state 1))
+(defun set-c-toggle-hungry-state()
+  (c-toggle-hungry-state 1))
 
 (add-hook 'c-mode-hook
 	  (lambda ()
 	    (c-set-style "linux")
 	    (flyspell-prog-mode)
+	    (turn-on-auto-fill)
 	    ))
-(add-hook 'c-mode-hook 'set-c-toggle-auto-hungry-state)
+(add-hook 'c-mode-hook 'set-c-toggle-hungry-state)
 
 (add-hook 'c++-mode-hook
 	  (lambda ()
 	    (c-set-style "Stroustrup")
 	    (flyspell-prog-mode)
+	    (turn-on-auto-fill)
 	    ))
-(add-hook 'c++-mode-hook 'set-c-toggle-auto-hungry-state)
+(add-hook 'c++-mode-hook 'set-c-toggle-hungry-state)
 
 (add-hook 'shell-script-mode-hook
-	  (lambda () (flyspell-prog-mode)))
+	  (lambda ()
+	    (turn-on-auto-fill)
+	    (flyspell-prog-mode)))
 
 (global-linum-mode t)
 (setq linum-format "%5d ")
@@ -382,6 +387,10 @@ Case-sensitive."
 (abbrev-mode t)
 
 (global-set-key [f12] 'linum-mode)
+(defun disable-linum()
+  (linum-mode 0))
+(add-hook 'shell-mode-hook 'disable-linum)
+
 
 (setq evil-toggle-key "")
 (require 'evil)
@@ -422,3 +431,20 @@ Case-sensitive."
 (global-set-key (kbd "\C-xzz") 'kill-emacs)
 
 ;; (desktop-save-mode 1)
+
+(require 'org)
+(setq org-startup-indented t)
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
+(setq org-agenda-files (list "~/.emacs.d/org/work.org"
+			     "~/.emacs.d/org/life.org"
+			     "~/.emacs.d/org/home.org"))
+
+(setq default-abbrev-mode t)
+
+;;
+(defun my-bind-clb ()
+  (define-key c-mode-base-map "\C-m"
+    'c-context-line-break))
+(add-hook 'c-initialization-hook 'my-bind-clb)
