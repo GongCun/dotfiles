@@ -365,6 +365,7 @@ Case-sensitive."
          '(try-expand-line)))
     (call-interactively 'hippie-expand)))
 
+;; (global-unset-key (kbd "\C-x\C-l"))
 (global-set-key "\C-x\C-l" 'vi-full-line-completion)
 
 (defun vi-yank-to-begin ()
