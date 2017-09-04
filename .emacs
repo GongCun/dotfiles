@@ -393,7 +393,15 @@ Case-sensitive."
 (add-hook 'shell-mode-hook 'disable-linum)
 
 
-(setq evil-toggle-key "")
+;; (setq evil-toggle-key "")
+(eval-after-load "evil-maps"
+  (dolist (map '(evil-motion-state-map
+                 evil-insert-state-map
+		 evil-normal-state-map
+		 evil-visual-state-map
+                 evil-emacs-state-map))
+    (define-key (eval map) "\C-e" nil)))
+
 (require 'evil)
 (evil-mode 1)
 (global-set-key [f7] 'evil-mode)
@@ -449,3 +457,34 @@ Case-sensitive."
   (define-key c-mode-base-map "\C-m"
     'c-context-line-break))
 (add-hook 'c-initialization-hook 'my-bind-clb)
+
+;;
+(defun scroll-up-one () "Scroll up 1 line." (interactive)
+       (scroll-up (prefix-numeric-value current-prefix-arg)))
+(defun scroll-down-one () "Scroll down 1 line." (interactive)
+       (scroll-down (prefix-numeric-value current-prefix-arg)))
+
+(global-unset-key "\C-l")
+(global-unset-key "\C-x\C-l")
+(global-set-key "\C-x\C-l" 'recenter-top-bottom)
+(global-set-key "\C-l" 'scroll-up-one)
+(global-unset-key "\M-l")
+(global-set-key "\M-l" 'scroll-down-one)
+
+;;
+(defun my-comment-line ()
+  "comment the current line"
+  (interactive)
+  (let ((beg (line-beginning-position))
+        (end (line-end-position)))
+    (comment-region beg end)))
+
+(defun my-uncomment-line ()
+  "uncomment the current line"
+  (interactive)
+  (let ((beg (line-beginning-position))
+        (end (line-end-position)))
+    (uncomment-region beg end)))
+
+(global-set-key "\C-x\C-m" 'my-comment-line)
+(global-set-key "\C-x\M-m" 'my-uncomment-line)
