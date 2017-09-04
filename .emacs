@@ -392,8 +392,10 @@ Case-sensitive."
   (linum-mode 0))
 (add-hook 'shell-mode-hook 'disable-linum)
 
-
 ;; (setq evil-toggle-key "")
+(require 'evil)
+
+;; disabled \C-a, \C-e, \C-d in evil-mode
 (eval-after-load "evil-maps"
   (dolist (map '(evil-motion-state-map
                  evil-insert-state-map
@@ -402,7 +404,23 @@ Case-sensitive."
                  evil-emacs-state-map))
     (define-key (eval map) "\C-e" nil)))
 
-(require 'evil)
+(eval-after-load "evil-maps"
+  (dolist (map '(evil-motion-state-map
+                 evil-insert-state-map
+		 evil-normal-state-map
+		 evil-visual-state-map
+                 evil-emacs-state-map))
+    (define-key (eval map) "\C-a" nil)))
+
+(eval-after-load "evil-maps"
+  (dolist (map '(evil-motion-state-map
+                 evil-insert-state-map
+		 evil-normal-state-map
+		 evil-visual-state-map
+                 evil-emacs-state-map))
+    (define-key (eval map) "\C-d" nil)))
+;;
+
 (evil-mode 1)
 (global-set-key [f7] 'evil-mode)
 
