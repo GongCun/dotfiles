@@ -59,6 +59,7 @@
 	    (c-set-style "linux")
 	    (flyspell-prog-mode)
 	    (turn-on-auto-fill)
+	    (c-toggle-auto-state 1)
 	    ))
 (add-hook 'c-mode-hook 'set-c-toggle-hungry-state)
 
@@ -67,6 +68,7 @@
 	    (c-set-style "Stroustrup")
 	    (flyspell-prog-mode)
 	    (turn-on-auto-fill)
+	    (c-toggle-auto-state 1)
 	    ))
 (add-hook 'c++-mode-hook 'set-c-toggle-hungry-state)
 
@@ -316,6 +318,8 @@ Case-sensitive."
  '(ac-modes
    (quote
     (emacs-lisp-mode lisp-mode lisp-interaction-mode slime-repl-mode nim-mode c-mode cc-mode c++-mode objc-mode swift-mode go-mode java-mode malabar-mode clojure-mode clojurescript-mode scala-mode scheme-mode ocaml-mode tuareg-mode coq-mode haskell-mode agda-mode agda2-mode perl-mode cperl-mode python-mode ruby-mode lua-mode tcl-mode ecmascript-mode javascript-mode js-mode js-jsx-mode js2-mode js2-jsx-mode coffee-mode php-mode css-mode scss-mode less-css-mode elixir-mode makefile-mode sh-mode fortran-mode f90-mode ada-mode xml-mode sgml-mode web-mode ts-mode sclang-mode verilog-mode qml-mode apples-mode text-mode evil-mode org-mode shell-script-mode)))
+ '(c-electric-pound-behavior (quote (alignleft)))
+ '(c-syntactic-indentation-in-macros nil)
  '(comment-column 34)
  '(compile-command "make ")
  '(custom-enabled-themes (quote (tsdh-dark)))
@@ -396,7 +400,7 @@ Case-sensitive."
 ;; (setq evil-toggle-key "")
 (require 'evil)
 
-;; disabled \C-a, \C-e, \C-d, \C-k in evil-mode
+;; disabled \C-a, \C-e, \C-d, \C-k, ... in evil-mode
 (eval-after-load "evil-maps"
   (dolist (map '(evil-motion-state-map
                  evil-insert-state-map
@@ -428,7 +432,28 @@ Case-sensitive."
 		 evil-visual-state-map
                  evil-emacs-state-map))
     (define-key (eval map) "\C-k" nil)))
-;;
+
+(eval-after-load "evil-maps"
+  (dolist (map '(evil-motion-state-map
+                 evil-insert-state-map
+		 evil-normal-state-map
+		 evil-visual-state-map
+                 evil-emacs-state-map))
+    (define-key (eval map) "\C-n" nil)))
+
+(eval-after-load "evil-maps"
+  (dolist (map '(evil-motion-state-map
+                 evil-insert-state-map
+		 evil-normal-state-map
+		 evil-visual-state-map
+                 evil-emacs-state-map))
+    (define-key (eval map) "\C-p" nil)))
+
+;; don't use vim 'window only' command
+(eval-after-load "evil-maps"
+  (define-key evil-motion-state-map "\C-wo" nil))
+
+;;;;;;
 
 (evil-mode 1)
 (global-set-key [f7] 'evil-mode)
