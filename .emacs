@@ -72,6 +72,32 @@
 	    ))
 (add-hook 'c++-mode-hook 'set-c-toggle-hungry-state)
 
+;; (defun my-c-mode-hook ()
+  ;; (c-set-offset 'statement-cont
+		;; c-lineup-assignments))
+
+;; (add-hook 'c-mode-hook 'my-c-mode-hook)
+;; (add-hook 'c++-mode-hook 'my-c-mode-hook)
+
+
+(c-add-style "linux"
+	     '((c-basic-offset . 8)
+	       (c-offsets-alist
+		(statement-cont . c-lineup-assignments))))
+(c-add-style "Stroustrup"
+	     '((c-basic-offset . 4)
+	       (c-offsets-alist
+		(statement-cont . c-lineup-assignments))))
+
+;;;;;; error
+;; (c-add-style "Stroustrup"
+;; 	     '((c-basic-offset . 4)
+;; 	       (c-offsets-alist 
+;; 		(statement-cont . (when (looking-at "=")
+;; 				    'c-lineup-assignments
+;; 				    '+)))))
+	
+
 (add-hook 'shell-script-mode-hook
 	  (lambda ()
 	    (turn-on-auto-fill)
@@ -319,6 +345,7 @@ Case-sensitive."
    (quote
     (emacs-lisp-mode lisp-mode lisp-interaction-mode slime-repl-mode nim-mode c-mode cc-mode c++-mode objc-mode swift-mode go-mode java-mode malabar-mode clojure-mode clojurescript-mode scala-mode scheme-mode ocaml-mode tuareg-mode coq-mode haskell-mode agda-mode agda2-mode perl-mode cperl-mode python-mode ruby-mode lua-mode tcl-mode ecmascript-mode javascript-mode js-mode js-jsx-mode js2-mode js2-jsx-mode coffee-mode php-mode css-mode scss-mode less-css-mode elixir-mode makefile-mode sh-mode fortran-mode f90-mode ada-mode xml-mode sgml-mode web-mode ts-mode sclang-mode verilog-mode qml-mode apples-mode text-mode evil-mode org-mode shell-script-mode)))
  '(c-electric-pound-behavior (quote (alignleft)))
+ '(c-offsets-alist (quote ((statement-cont . +))))
  '(c-syntactic-indentation-in-macros nil)
  '(comment-column 34)
  '(compile-command "make ")
@@ -540,3 +567,4 @@ Case-sensitive."
 
 (global-set-key "\C-x\C-m" 'my-comment-line)
 (global-set-key "\C-x\M-m" 'my-uncomment-line)
+
