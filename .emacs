@@ -83,11 +83,16 @@
 (c-add-style "linux"
 	     '((c-basic-offset . 8)
 	       (c-offsets-alist
-		(statement-cont . c-lineup-assignments))))
+		(statement-cont . c-lineup-assignments)
+		(arglist-close . 0)
+		)))
+
 (c-add-style "Stroustrup"
 	     '((c-basic-offset . 4)
 	       (c-offsets-alist
-		(statement-cont . c-lineup-assignments))))
+		(statement-cont . c-lineup-assignments)
+		(arglist-close . 0)
+		)))
 
 ;;;;;; error
 ;; (c-add-style "Stroustrup"
