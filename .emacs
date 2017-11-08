@@ -103,6 +103,11 @@
 ;; 				    '+)))))
 	
 
+(add-hook 'text-mode-hook
+	  (lambda ()
+	    (turn-on-auto-fill)
+	    (flyspell-prog-mode)))
+
 (add-hook 'shell-script-mode-hook
 	  (lambda ()
 	    (turn-on-auto-fill)
@@ -174,7 +179,7 @@ Case-sensitive."
   (interactive)
   (save-excursion
     (forward-line 1)
-    (delete-indentation)))
+    (join-line)))
 
 (defun vi-copy-line (arg)
   "Copy lines (as many as prefix argument) in the kill ring"
@@ -302,7 +307,9 @@ Case-sensitive."
 (global-set-key (kbd "\e\edd") 'kill-current-line)
 (global-set-key (kbd "\e\edf") 'kill-to-char)
 (global-set-key (kbd "\e\edt") 'kill-to-pre-char)
-(global-set-key (kbd "\e\ej") 'vi-join-line)
+;; (global-set-key (kbd "\e\ej") 'vi-join-line)
+(global-unset-key "\C-x\C-j")
+(global-set-key "\C-x\C-j" 'vi-join-line)
 (global-set-key (kbd "\e\eyy") 'vi-copy-line)
 (global-set-key (kbd "\e\ery") 'vi-yank-range)
 (global-set-key (kbd "\e\erd") 'vi-remove-range)
@@ -561,15 +568,33 @@ Case-sensitive."
   (interactive)
   (let ((beg (line-beginning-position))
         (end (line-end-position)))
-    (comment-region beg end)))
+    (comment-region beg end))
+  (next-line)
+  (move-beginning-of-line))
 
 (defun my-uncomment-line ()
   "uncomment the current line"
   (interactive)
   (let ((beg (line-beginning-position))
         (end (line-end-position)))
-    (uncomment-region beg end)))
+    (uncomment-region beg end))
+  (next-line)
+  (move-beginning-of-line))
 
+(global-unset-key "\C-x\C-m")
+(global-unset-key "\C-x\M-m")
 (global-set-key "\C-x\C-m" 'my-comment-line)
 (global-set-key "\C-x\M-m" 'my-uncomment-line)
+(global-unset-key "\C-x;")
+(global-set-key "\C-x/" 'comment-set-column)
+
+
+(add-to-list 'load-path "~/.emacs.d/lisp")
+(require 'make-mode)
+
+(defun my-set-align-region()
+  (interactive)
+  (universal-argument)
+  (align (region-beginning) (region-end)))
+(global-set-key "\C-c\M-a" 'my-set-align-region)
 
