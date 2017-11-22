@@ -113,8 +113,17 @@
 	    (turn-on-auto-fill)
 	    (flyspell-prog-mode)))
 
+(defun my-linum-mode-hook ()
+  (when linum-mode
+    (setq-local linum-format
+               (concat "  +%-" (number-to-string
+                            ;; Guesstimate number of buffer lines.
+                            (ceiling (log (max 1 (/ (buffer-size) 80)) 10)))
+                       "d  "))))
+(add-hook 'linum-mode-hook #'my-linum-mode-hook)
 (global-linum-mode t)
-(setq linum-format "%5d ")
+;; (setq linum-format "%5d ")
+
 (global-set-key "\M-*" 'pop-tag-mark)
 
 (setq lazy-highlight-cleanup nil)
@@ -593,8 +602,23 @@ Case-sensitive."
 (require 'make-mode)
 
 (defun my-set-align-region()
-  (interactive)
+  "Align marked region"
+  (interactive "*")
   (universal-argument)
   (align (region-beginning) (region-end)))
 (global-set-key "\C-c\M-a" 'my-set-align-region)
 
+(defun my-set-align-comment(beginning end)
+  "Align instance of // within marked region."
+  (interactive "*r")
+  (let (indent-tabs-mode align-to-tab-stop)
+    (align-regexp beginning end "\\(\\s-*\\)//")))
+(global-set-key "\C-x\M-a" 'my-set-align-comment)
+
+
+(defun my-set-align-function(beginning end)
+  "Align instance of function arguments within marked region."
+  (interactive "*r")
+  (let (indent-tabs-mode align-to-tab-stop)
+    (align-regexp beginning end ",\\(\\s-*\\)")))
+(global-set-key "\C-x\M-f" 'my-set-align-function)
