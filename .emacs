@@ -116,10 +116,10 @@
 (defun my-linum-mode-hook ()
   (when linum-mode
     (setq-local linum-format
-               (concat "  +%-" (number-to-string
-                            ;; Guesstimate number of buffer lines.
-                            (ceiling (log (max 1 (/ (buffer-size) 80)) 10)))
-                       "d  "))))
+                (let ((w (length (number-to-string
+                                  (count-lines (point-min) (point-max))))))
+                  (concat "  %" (number-to-string w) "d  ")))))
+
 (add-hook 'linum-mode-hook #'my-linum-mode-hook)
 (global-linum-mode t)
 ;; (setq linum-format "%5d ")
