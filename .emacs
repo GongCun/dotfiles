@@ -29,6 +29,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(font-lock-comment-delimiter-face ((t (:inherit font-lock-comment-face :foreground "cyan"))))
+ '(minibuffer-prompt ((t (:background "white" :foreground "black" :box (:line-width -1 :color "black" :style released-button) :weight bold))))
  '(mode-line ((t (:background "gray30" :box (:line-width 1 :color "red") :family "DejaVu Sans Mono-10"))))
  '(org-footnote ((t (:foreground "peach puff" :underline t)))))
 
@@ -622,3 +623,33 @@ Case-sensitive."
   (let (indent-tabs-mode align-to-tab-stop)
     (align-regexp beginning end ",\\(\\s-*\\)")))
 (global-set-key "\C-x\M-f" 'my-set-align-function)
+
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(load-theme 'dracula t)
+
+(global-unset-key "\M-=")		; count-words-region
+(global-set-key "\M-=" 'replace-string)
+
+;; \C-c\M-a align selected region
+;; \C-c\M-b align 'start,end' region
+(defun my-align-lines-region(string)
+  "Align region between beginning and end."
+  (interactive "sAlign lines region: ")
+  (save-excursion
+    (let* ((list (split-string string "," t))
+	   (start (string-to-number (nth 0 list)))
+	   (end (string-to-number (nth 1 list))))
+      (if (> start end)
+	  (progn
+	    (setq tmp start)
+	    (setq start tmp)
+	    (setq end tmp)))
+      (goto-line start)
+      (setq BEG (point))
+      (goto-line end)
+      (setq END (line-end-position))
+      (align BEG END)
+      (setq lines (+ (- end start) 1))
+      (message "%d line%s aligned" lines (if (= 1 lines) "" "s")))))
+
+(global-set-key "\C-x\M-b" 'my-align-lines-region)
