@@ -310,6 +310,9 @@ Case-sensitive."
 (setq inhibit-startup-message t)
 (setq initial-scratch-message nil)
 
+(menu-bar-mode 0)
+(tool-bar-mode 0)
+
 ;; Move to beginning or end of buffer
 (global-set-key (kbd "\C-c <up>") 'beginning-of-buffer)
 (global-set-key (kbd "\C-c <down>") 'end-of-buffer)
