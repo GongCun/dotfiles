@@ -549,10 +549,10 @@ Case-sensitive."
 (add-to-list 'load-path "~/.emacs.d/lisp")
 (require 'make-mode)
 
-(defun my-set-align-region()
-  (interactive "*")
-  (universal-argument)
-  (align (region-beginning) (region-end)))
+(defun my-set-align-region(beginning end)
+  (interactive "*r")
+  ;; (universal-argument)
+  (align beginning end))
 (global-set-key "\C-c\M-a" 'my-set-align-region)
 
 (defun my-set-align-comment(beginning end)
