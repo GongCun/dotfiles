@@ -1,3 +1,7 @@
+(menu-bar-mode 0)
+(tool-bar-mode 0)
+(require 'ido)
+(ido-mode t)
 
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
@@ -381,6 +385,7 @@ Case-sensitive."
  '(image-file-name-extensions
    (quote
     ("png" "jpeg" "jpg" "gif" "tiff" "tif" "xbm" "xpm" "pbm" "pgm" "ppm" "pnm" "svg" "bmp")))
+ '(indent-tabs-mode nil)
  '(org-export-with-sub-superscripts (quote {}))
  '(org-latex-inline-image-rules
    (quote
