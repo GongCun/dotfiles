@@ -22,10 +22,13 @@
 (add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/"))
 
-(setq url-proxy-services
-  '(("no_proxy". "^\\(localhost\\)")
-    ("http" . "proxysvr.bocmo.com:8080")
-    ("https" . "proxysvr.bocmo.com:8080")))
+(let* ((proxysvr "22.236.180.208")
+       (proxyport "8888")
+       (myproxy (concat proxysvr ":" proxyport)))
+  (setq url-proxy-services
+        `(("no_proxy". "^\\(localhost\\)")
+          ("http" . ,myproxy)
+          ("https" . ,myproxy))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
