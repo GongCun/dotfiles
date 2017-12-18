@@ -428,8 +428,8 @@ Case-sensitive."
          '(try-expand-line)))
     (call-interactively 'hippie-expand)))
 
-;; (global-unset-key (kbd "\C-x\C-l"))
-(global-set-key "\C-x\C-l" 'vi-full-line-completion)
+(global-unset-key (kbd "\C-x\C-n"))
+(global-set-key "\C-x\C-n" 'vi-full-line-completion)
 
 (defun vi-yank-to-begin ()
   "Yank from begin of line to current point"
@@ -662,3 +662,18 @@ Case-sensitive."
       (message "%d line%s aligned" lines (if (= 1 lines) "" "s")))))
 
 (global-set-key "\C-c\M-b" 'my-align-lines-region)
+
+;; To auto-start Smex every time
+(require 'smex) ; Not needed if you use package.el
+(smex-initialize) ; Can be omitted. This might cause a (minimal) delay
+                  ; when Smex is auto-initialized on its first run.
+
+;; Bind some keys
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+;; This is your old M-x.
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+
+;; Run Smex. (Type M-x, if that's your key binding).
+;; 'C-s/C-r' switches to the next/previous match. 'Enter' executes the
+;; selected command. 
