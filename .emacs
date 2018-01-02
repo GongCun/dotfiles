@@ -194,9 +194,10 @@ Case-sensitive."
 
 (defun vi-join-line ()
   (interactive)
-  (save-excursion
+  ;; (save-excursion
     (forward-line 1)
-    (join-line)))
+    (join-line))
+  ;; )
 
 (defun vi-copy-line (arg)
   "Copy lines (as many as prefix argument) in the kill ring"
@@ -677,3 +678,7 @@ Case-sensitive."
 ;; Run Smex. (Type M-x, if that's your key binding).
 ;; 'C-s/C-r' switches to the next/previous match. 'Enter' executes the
 ;; selected command. 
+
+(require 'cnfonts)
+(cnfonts-enable)
+(cnfonts-set-spacemacs-fallback-fonts)
