@@ -639,6 +639,8 @@ Case-sensitive."
 
 (global-unset-key "\M-=")		; count-words-region
 (global-set-key "\M-=" 'replace-string)
+(global-unset-key (kbd "C-c C-="))
+(global-set-key (kbd "C-c C-=") 'count-words)
 
 ;; \C-c\M-a align selected region
 ;; \C-c\M-b align 'start,end' region
