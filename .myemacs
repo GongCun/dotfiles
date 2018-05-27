@@ -1,0 +1,76 @@
+;; Some functions and hooks
+(defun my-linum-mode-hook ()
+  (when linum-mode
+    (setq-local linum-format
+                (let ((w (length (number-to-string
+                                  (count-lines (point-min) (point-max))))))
+                  (concat "+%" (number-to-string w) "d  ")))))
+
+(add-hook 'linum-mode-hook #'my-linum-mode-hook)
+;; (global-linum-mode 1)
+
+(defun set-c-toggle-hungry-state()
+  (c-toggle-hungry-state 1))
+
+(add-hook 'c-mode-hook
+          (lambda ()
+            (c-set-style "linux")
+            (flyspell-prog-mode)
+            (turn-on-auto-fill)
+            (c-toggle-auto-state 1)
+            ))
+(add-hook 'c-mode-hook 'set-c-toggle-hungry-state)
+
+(add-hook 'c++-mode-hook
+          (lambda ()
+            (c-set-style "stroustrup")
+            (flyspell-prog-mode)
+            (turn-on-auto-fill)
+            (c-toggle-auto-state 1)
+            ))
+(add-hook 'c++-mode-hook 'set-c-toggle-hungry-state)
+
+(c-add-style "linux"
+             '((c-basic-offset . 4)
+               (c-offsets-alist
+                (statement-cont . c-lineup-assignments)
+                (arglist-close . 0)
+                )))
+
+(c-add-style "stroustrup"
+             '((c-basic-offset . 4)
+               (c-offsets-alist
+                (statement-cont . c-lineup-assignments)
+                (arglist-close . 0)
+                )))
+
+(add-hook 'text-mode-hook
+          (lambda ()
+            (turn-on-auto-fill)
+            (flyspell-prog-mode)))
+
+(add-hook 'shell-script-mode-hook
+          (lambda ()
+            (turn-on-auto-fill)
+            (flyspell-prog-mode)))
+
+;; some customize keybind
+(global-set-key [f8] 'compile)
+(global-set-key [f9] 'ispell-word)
+(global-set-key [f10] 'flyspell-mode)
+(global-set-key [f11] 'string-insert-rectangle)
+(global-set-key [f12] 'linum-mode)
+(global-set-key (kbd "\C-xI") 'insert-buffer)
+
+(progn
+  (require 'dired)
+  (define-key dired-mode-map (kbd "o") 'other-window)
+  (define-key dired-mode-map (kbd "2") 'delete-window)
+  (define-key dired-mode-map (kbd "3") 'delete-other-windows)
+  (define-key dired-mode-map (kbd "4") 'split-window-below)
+  (define-key dired-mode-map (kbd "C-o") 'find-file))
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (define-key org-mode-map "\C-cl" 'org-store-link)
+            (define-key org-mode-map "\C-ca" 'org-agenda)))
