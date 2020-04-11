@@ -348,6 +348,10 @@ you should place your code here."
   (global-set-key (kbd "C-S-j") 'delete-indentation)
   (global-set-key (kbd "C-S-k") 'delete-region)
   (setq tramp-default-method "plink")
+  ;; It's bound to 'tmm-menuber' default, but will hang the spacemacs, temporary
+  ;; disable it.
+  (global-unset-key (kbd "M-`"))
+  (global-set-key "\M-`" 'auto-fill-mode)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
