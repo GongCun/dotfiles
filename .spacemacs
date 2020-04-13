@@ -33,6 +33,7 @@ values."
    '(
      (shell :variables shell-enable-smart-eshell t)
      (shell :variables shell-default-shell 'eshell)
+     (shell :variables shell-default-term-shell "c:/cygwin64/bin/bash.exe")
      command-log
      auto-completion
      d
@@ -352,6 +353,7 @@ you should place your code here."
   ;; disable it.
   (global-unset-key (kbd "M-`"))
   (global-set-key "\M-`" 'auto-fill-mode)
+  (global-set-key (kbd "C-M-`") 'not-modified)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
