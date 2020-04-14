@@ -35,6 +35,7 @@ values."
      ;;graphviz
      (shell :variables shell-enable-smart-eshell t)
      (shell :variables shell-default-shell 'eshell)
+     (shell :variables shell-default-term-shell "c:/cygwin64/bin/bash.exe")
      command-log
      sql
      html
@@ -342,6 +343,25 @@ you should place your code here."
   (global-set-key (kbd "C-S-j") 'delete-indentation)
   (global-set-key (kbd "C-S-k") 'delete-region)
   (setq tramp-default-method "plink")
+  ;; It's bound to 'tmm-menuber' default, but will hang the spacemacs, temporary
+  ;; disable it.
+  (global-unset-key (kbd "M-`"))
+  (global-set-key "\M-`" 'auto-fill-mode)
+  (global-set-key (kbd "C-M-`") 'not-modified)
+
+  (global-unset-key "\C-x\C-l")
+  (global-set-key "\C-x\C-l" 'recenter-top-bottom)
+
+  (defun scroll-up-one () "Scroll up 1 line." (interactive)
+         (scroll-up (prefix-numeric-value current-prefix-arg)))
+  (defun scroll-down-one () "Scroll down 1 line." (interactive)
+         (scroll-down (prefix-numeric-value current-prefix-arg)))
+
+  (global-unset-key "\C-l")
+  (global-set-key "\C-l" 'scroll-up-one)
+
+  (global-unset-key "\M-l")
+  (global-set-key "\M-l" 'scroll-down-one)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
