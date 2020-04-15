@@ -362,6 +362,7 @@ you should place your code here."
 
   (global-unset-key "\M-l")
   (global-set-key "\M-l" 'scroll-down-one)
+  (add-to-list 'evil-emacs-state-modes 'vc-git-log-edit-mode)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
