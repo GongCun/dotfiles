@@ -369,6 +369,13 @@ you should place your code here."
   (global-unset-key "\M-l")
   (global-set-key "\M-l" 'scroll-down-one)
   (add-to-list 'evil-emacs-state-modes 'vc-git-log-edit-mode)
+  (eval-after-load "evil-maps"
+    (define-key evil-motion-state-map "\C-wo" nil))
+  (add-to-list 'evil-emacs-state-modes 'shell-mode)
+  (add-to-list 'evil-emacs-state-modes 'eshell-mode)
+
+  (global-unset-key (kbd "M-m SPC"))
+  (global-set-key (kbd "M-m SPC") (lambda () (interactive) (other-window 1)))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
