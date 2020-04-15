@@ -376,6 +376,7 @@ you should place your code here."
 
   (global-unset-key (kbd "M-m SPC"))
   (global-set-key (kbd "M-m SPC") (lambda () (interactive) (other-window 1)))
+  (global-set-key (kbd "M-m M-m") (lambda () (interactive) (unexpand-abbrev)))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
