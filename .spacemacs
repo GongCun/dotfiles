@@ -32,8 +32,8 @@ values."
    dotspacemacs-configuration-layers
    '(
      (shell :variables shell-enable-smart-eshell t)
-     (shell :variables shell-default-shell 'eshell)
-     (shell :variables shell-default-term-shell "c:/cygwin64/bin/bash.exe")
+     (shell :variables shell-default-shell 'shell)
+     ;; (shell :variables shell-default-term-shell "c:/cygwin64/bin/bash.exe")
      command-log
      auto-completion
      d
