@@ -340,8 +340,10 @@ you should place your code here."
 
   (global-set-key "\M-'" 'auto-complete-mode)
   ;; (global-set-key "\M-/" 'dabbrev-expand)
-  (global-set-key (kbd "C-S-j") 'delete-indentation)
-  (global-set-key (kbd "C-S-k") 'delete-region)
+  ;; (global-set-key (kbd "C-S-j") 'delete-indentation)
+  ;; (global-set-key (kbd "C-S-k") 'delete-region)
+  (global-set-key (kbd "C-^") 'delete-indentation)
+  (global-set-key (kbd "C-M-k") 'delete-region)
   (setq tramp-default-method "plink")
   ;; It's bound to 'tmm-menuber' default, but will hang the spacemacs, temporary
   ;; disable it.
@@ -367,8 +369,12 @@ you should place your code here."
   (add-to-list 'evil-emacs-state-modes 'eshell-mode)
 
   ;; (global-unset-key (kbd "M-m SPC"))
-  (global-set-key (kbd "M-m SPC") (lambda () (interactive) (other-window 1)))
-  (global-set-key (kbd "M-m M-m") (lambda () (interactive) (unexpand-abbrev)))
+  ;; (global-set-key (kbd "M-m SPC") (lambda () (interactive) (other-window 1)))
+  ;; (global-set-key (kbd "M-m M-m") (lambda () (interactive) (unexpand-abbrev)))
+  (global-set-key (kbd "M-m d") 'downcase-word)
+  (global-set-key (kbd "M-m SPC") 'other-window)
+  (global-set-key (kbd "M-m M-m") 'unexpand-abbrev)
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
