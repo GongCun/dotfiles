@@ -374,9 +374,13 @@ you should place your code here."
   (add-to-list 'evil-emacs-state-modes 'shell-mode)
   (add-to-list 'evil-emacs-state-modes 'eshell-mode)
 
-  (global-unset-key (kbd "M-m SPC"))
-  (global-set-key (kbd "M-m SPC") (lambda () (interactive) (other-window 1)))
-  (global-set-key (kbd "M-m M-m") (lambda () (interactive) (unexpand-abbrev)))
+  ;; (global-unset-key (kbd "M-m SPC"))
+  ;; (global-set-key (kbd "M-m SPC") (lambda () (interactive) (other-window 1)))
+  ;; (global-set-key (kbd "M-m M-m") (lambda () (interactive) (unexpand-abbrev)))
+  (global-set-key (kbd "M-m d") 'downcase-word)
+  (global-set-key (kbd "M-m SPC") 'other-window)
+  (global-set-key (kbd "M-m M-m") 'unexpand-abbrev)
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
