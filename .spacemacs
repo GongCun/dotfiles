@@ -33,7 +33,7 @@ values."
    '(
      themes-megapack
      git
-     version-control
+     ;; version-control
      yaml
      (shell :variables shell-enable-smart-eshell t)
      (shell :variables
