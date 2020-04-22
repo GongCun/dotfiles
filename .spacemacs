@@ -376,6 +376,10 @@ you should place your code here."
   (global-set-key (kbd "M-m d") 'downcase-word)
   (global-set-key (kbd "M-m SPC") 'other-window)
   (global-set-key (kbd "M-m M-m") 'unexpand-abbrev)
+  (global-set-key (kbd "M-m h") 'windmove-left)
+  (global-set-key (kbd "M-m j") 'windmove-down)
+  (global-set-key (kbd "M-m k") 'windmove-up)
+  (global-set-key (kbd "M-m l") 'windmove-right)
 
   )
 
