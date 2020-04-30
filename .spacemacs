@@ -393,6 +393,8 @@ you should place your code here."
   (global-set-key (kbd "M-m j") 'windmove-down)
   (global-set-key (kbd "M-m k") 'windmove-up)
   (global-set-key (kbd "M-m l") 'windmove-right)
+  (global-set-key (kbd "M-m u") 'winner-undo)
+  (global-set-key (kbd "M-m U") 'winner-redo)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
