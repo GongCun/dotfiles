@@ -438,6 +438,7 @@ you should place your code here."
  '(c-electric-pound-behavior (quote (alignleft)))
  '(desktop-save-mode t)
  '(evil-want-Y-yank-to-eol nil)
+ '(explicit-bash-args (quote ("--noediting")))
  '(org-agenda-files
    (quote
     ("~/.emacs.d/org/work.org" "~/.emacs.d/org/home.org" "d:/Documents/GongCun/plan/plan.org")))
