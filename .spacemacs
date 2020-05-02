@@ -406,6 +406,24 @@ you should place your code here."
   
   ;;; copy from: https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Bintl/chinese
   ;; (spacemacs//set-monospaced-font   "InputMono" "Microsoft Yahei" 15 16)
+
+  (defun send-previous-input-to-shell (&optional arg)
+    "Run previous command in shell window without switching buffer."
+    (interactive "*P")
+    (if arg
+        (setq n (prefix-numeric-value arg))
+      (setq n 1))
+
+    (let ((proc (get-process "shell")))
+      (if proc
+          (let ((buffer (process-buffer proc)))
+            (save-excursion
+              (set-buffer buffer)
+              (comint-previous-input n)
+              (comint-send-input))))))
+
+  (global-set-key (kbd "M-m C-e") 'send-previous-input-to-shell)
+  ;; maybe should ()load-file .myemacs) here
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
