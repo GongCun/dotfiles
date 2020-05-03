@@ -410,6 +410,7 @@ you should place your code here."
 
   (load-file "~/.emacs.d/private/local/send-previous-input-to-shell.el")
   (global-set-key (kbd "M-m C-e") 'send-previous-input-to-shell)
+  (global-set-key (kbd "M-m C-d") 'shell-cd-current-directory)
   ;; maybe should (load-file .myemacs) here
   )
 
