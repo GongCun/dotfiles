@@ -407,23 +407,50 @@ you should place your code here."
   ;;; copy from: https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Bintl/chinese
   ;; (spacemacs//set-monospaced-font   "InputMono" "Microsoft Yahei" 15 16)
 
+
   (defun send-previous-input-to-shell (&optional arg)
-    "Run previous command in shell window without switching buffer."
+    "Run previous command in shell window without switching buffer.
+If there are more than one shell running, the buffer that was
+switched last time will be selected for execution."
     (interactive "*P")
     (if arg
-        (setq n (prefix-numeric-value arg))
-      (setq n 1))
+        (setq arg (prefix-numeric-value arg))
+      (setq arg 1))
 
-    (let ((proc (get-process "shell")))
-      (if proc
-          (let ((buffer (process-buffer proc)))
-            (save-excursion
-              (set-buffer buffer)
-              (comint-previous-input n)
-              (comint-send-input))))))
+    (setq list (process-list))
+    (setq count 0)
+    (while list
+      (if (string-match "\\<shell\\>" (format "%s" (car list)))
+          (setq count (1+ count))
+        )
+      (setq list (cdr list)))
+
+    (if (= 0 count)
+        (error "no shell process")
+      (if (= 1 count)
+          (let ((proc (get-process "shell")))
+            (if proc
+                (let ((buffer (process-buffer proc)))
+                  (save-excursion
+                    (set-buffer buffer)
+                    ;; (comint-show-maximum-output)
+                    (end-of-buffer)
+                    (comint-previous-input arg)
+                    (comint-send-input)))))
+        (let ((buffer (car (car (window-prev-buffers)))))
+          (setq mode (with-current-buffer buffer major-mode))
+          (if (string= "shell-mode" (format "%s" mode))
+              (save-excursion
+                (set-buffer buffer)
+                ;; (comint-show-maximum-output)
+                (end-of-buffer)
+                (comint-previous-input arg)
+                (comint-send-input))
+            (error "previous buffer \"%s\" is not shell-mode!" (other-buffer))
+            )))))
 
   (global-set-key (kbd "M-m C-e") 'send-previous-input-to-shell)
-  ;; maybe should ()load-file .myemacs) here
+  ;; maybe should (load-file .myemacs) here
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
