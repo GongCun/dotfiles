@@ -399,11 +399,15 @@ you should place your code here."
   (global-set-key (kbd "M-m U") 'winner-redo)
   ;;; cpoy from: https://github.com/tumashu/cnfonts
   (set-frame-font
-   "-outline-InputMono-normal-normal-normal-mono-16-*-*-*-c-*-iso8859-1")
+   "-outline-InputMono-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
+
+  (when (display-graphic-p)
+    (setq fonts '("InputMono"	"WenQuanYi Micro Hei Mono")))
+
   (dolist (charset '(kana han symbol cjk-misc bopomofo))
     (set-fontset-font (frame-parameter nil 'font)
-                      charset (font-spec :family "Microsoft Yahei" :size 16)))
-  
+                      charset (font-spec :family "WenQuanYi Micro Hei Mono" :size 16)))
+
   ;;; copy from: https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Bintl/chinese
   ;; (spacemacs//set-monospaced-font   "InputMono" "Microsoft Yahei" 15 16)
 
