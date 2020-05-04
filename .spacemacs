@@ -386,7 +386,7 @@ you should place your code here."
 
   ;;; cpoy from: https://github.com/tumashu/cnfonts
   (set-frame-font
-   "-outline-InputMono-normal-normal-normal-mono-16-*-*-*-c-*-iso8859-1")
+   "-outline-InputMono-normal-normal-normal-mono-14-*-*-*-c-*-iso8859-1")
 
   ;; (when (display-graphic-p)
   ;;   (setq fonts '("InputMono"	"WenQuanYi Micro Hei Mono")))
