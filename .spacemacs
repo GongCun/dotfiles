@@ -381,13 +381,19 @@ you should place your code here."
   (global-set-key (kbd "M-m j") 'windmove-down)
   (global-set-key (kbd "M-m k") 'windmove-up)
   (global-set-key (kbd "M-m l") 'windmove-right)
+  (global-set-key (kbd "M-m u") 'winner-undo)
+  (global-set-key (kbd "M-m U") 'winner-redo)
 
   ;;; cpoy from: https://github.com/tumashu/cnfonts
   (set-frame-font
    "-outline-InputMono-normal-normal-normal-mono-16-*-*-*-c-*-iso8859-1")
+
+  ;; (when (display-graphic-p)
+  ;;   (setq fonts '("InputMono"	"WenQuanYi Micro Hei Mono")))
+
   (dolist (charset '(kana han symbol cjk-misc bopomofo))
     (set-fontset-font (frame-parameter nil 'font)
-                      charset (font-spec :family "Microsoft Yahei" :size 15)))
+                      charset (font-spec :family "WenQuanYi Micro Hei Mono" :size 15)))
 
   ;;; setup the (send-previous-input-to-shell) function and key-bindings
   (load-file "~/.emacs.d/private/local/send-previous-input-to-shell.el")
