@@ -143,8 +143,9 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+   dotspacemacs-default-font '("InputMono"
+                               ;; "Source Code Pro"
+                               :size 14
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -380,6 +381,18 @@ you should place your code here."
   (global-set-key (kbd "M-m j") 'windmove-down)
   (global-set-key (kbd "M-m k") 'windmove-up)
   (global-set-key (kbd "M-m l") 'windmove-right)
+
+  ;;; cpoy from: https://github.com/tumashu/cnfonts
+  (set-frame-font
+   "-outline-InputMono-normal-normal-normal-mono-16-*-*-*-c-*-iso8859-1")
+  (dolist (charset '(kana han symbol cjk-misc bopomofo))
+    (set-fontset-font (frame-parameter nil 'font)
+                      charset (font-spec :family "Microsoft Yahei" :size 15)))
+
+  ;;; setup the (send-previous-input-to-shell) function and key-bindings
+  (load-file "~/.emacs.d/private/local/send-previous-input-to-shell.el")
+  (global-set-key (kbd "M-m C-e") 'send-previous-input-to-shell)
+  (global-set-key (kbd "M-m C-d") 'shell-cd-current-directory)
 
   )
 
