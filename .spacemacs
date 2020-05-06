@@ -337,17 +337,11 @@ you should place your code here."
   (setq c-default-style "linux"
         c-basic-offset 4)
   (add-to-list 'c-offsets-alist '(substatement-open . 0))
-  ;; (require 'org)
-  ;; (define-key org-mode-map "C-c'" nil)
-  ;; (add-hook 'org-mode-hook
-  ;;           (lambda()
-  ;;             (local-set-key "C-c C-'" 'org-edit-src-exit)))
+
   (global-unset-key (kbd "C-w"))
   (global-set-key (kbd "C-w") 'kill-ring-save)
   (global-unset-key (kbd "M-w"))
   (global-set-key (kbd "M-w") 'kill-region)
-  ;; (global-unset-key (kbd "C-x M-a"))
-  ;; (global-set-key (kbd "C-x M-a") 'back-to-indentation)
   (global-unset-key (kbd "M-a"))
   (global-set-key (kbd "M-a") 'back-to-indentation)
   (global-company-mode)
@@ -416,6 +410,23 @@ you should place your code here."
   (global-set-key (kbd "M-m C-e") 'send-previous-input-to-shell)
   (global-set-key (kbd "M-m C-d") 'shell-cd-current-directory)
   ;; maybe should (load-file .myemacs) here
+  (require 'evil)
+  (eval-after-load "evil-map"
+    (progn
+      (dolist (map '(evil-motion-state-map
+                     evil-insert-state-map
+                     evil-normal-state-map
+                     evil-visual-state-map
+                     ))
+        (define-key (eval map) "\C-e" nil)
+        (define-key (eval map) "\C-a" nil)
+        (define-key (eval map) "\C-d" nil)
+        (define-key (eval map) "\C-k" nil)
+        (define-key (eval map) "\C-n" nil)
+        (define-key (eval map) "\C-p" nil)
+        (define-key (eval map) "\C-w" 'kill-ring-save)
+        (define-key (eval map) "\C-y" nil))))
+      ;; (define-key evil-motion-state-map "\C-wo" nil)))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
