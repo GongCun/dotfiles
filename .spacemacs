@@ -388,8 +388,8 @@ you should place your code here."
   (set-frame-font
    "-outline-InputMono-normal-normal-normal-mono-14-*-*-*-c-*-iso8859-1")
 
-  ;; (when (display-graphic-p)
-  ;;   (setq fonts '("InputMono"	"WenQuanYi Micro Hei Mono")))
+  (when (display-graphic-p)
+    (setq fonts '("InputMono"	"WenQuanYi Micro Hei Mono")))
 
   (dolist (charset '(kana han symbol cjk-misc bopomofo))
     (set-fontset-font (frame-parameter nil 'font)
