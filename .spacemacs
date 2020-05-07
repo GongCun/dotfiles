@@ -400,6 +400,23 @@ you should place your code here."
   (global-set-key (kbd "M-m C-e") 'send-previous-input-to-shell)
   (global-set-key (kbd "M-m C-d") 'shell-cd-current-directory)
 
+  ;;; unmap some evil keys
+  (require 'evil)
+  (eval-after-load "evil-maps"
+    (dolist (map '(evil-motion-state-map
+                   evil-insert-state-map
+                   evil-normal-state-map
+                   evil-visual-state-map
+                   evil-emacs-state-map))
+      (define-key (eval map) "\C-e" nil)
+      (define-key (eval map) "\C-a" nil)
+      (define-key (eval map) "\C-d" nil)
+      (define-key (eval map) "\C-k" nil)
+      (define-key (eval map) "\C-n" nil)
+      (define-key (eval map) "\C-p" nil)
+      (define-key (eval map) "\C-w" 'kill-ring-save)
+      (define-key (eval map) "\C-y" nil)))
+  ;;;
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
