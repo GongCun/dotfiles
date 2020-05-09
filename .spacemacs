@@ -145,7 +145,7 @@ values."
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("InputMono"
                                ;; "Source Code Pro"
-                               :size 14
+                               :size 13
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -386,14 +386,14 @@ you should place your code here."
 
   ;;; cpoy from: https://github.com/tumashu/cnfonts
   (set-frame-font
-   "-outline-InputMono-normal-normal-normal-mono-14-*-*-*-c-*-iso8859-1")
+   "-outline-InputMono-normal-normal-normal-mono-13-*-*-*-c-*-iso8859-1")
 
   (when (display-graphic-p)
     (setq fonts '("InputMono"	"WenQuanYi Micro Hei Mono")))
 
   (dolist (charset '(kana han symbol cjk-misc bopomofo))
     (set-fontset-font (frame-parameter nil 'font)
-                      charset (font-spec :family "WenQuanYi Micro Hei Mono" :size 15)))
+                      charset (font-spec :family "WenQuanYi Micro Hei Mono" :size 14)))
 
   ;;; setup the (send-previous-input-to-shell) function and key-bindings
   (load-file "~/.emacs.d/private/local/send-previous-input-to-shell.el")
