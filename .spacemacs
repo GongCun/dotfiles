@@ -352,7 +352,9 @@ you should place your code here."
   ;; (global-set-key "\M-/" 'dabbrev-expand)
   (global-set-key (kbd "C-S-j") 'delete-indentation)
   (global-set-key (kbd "C-S-k") 'delete-region)
-  (global-set-key (kbd "C-M-k") 'delete-region)
+  ;; (global-set-key (kbd "C-M-k") 'delete-region)
+  (global-unset-key (kbd "C-M-k"))
+  (global-set-key (kbd "C-M-k") 'kill-sexp)
   (setq tramp-default-method "plink")
   ;; It's bound to 'tmm-menuber' default, but will hang the spacemacs, temporary
   ;; disable it.
