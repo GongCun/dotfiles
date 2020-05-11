@@ -429,6 +429,12 @@ you should place your code here."
         (define-key (eval map) "\C-w" 'kill-ring-save)
         (define-key (eval map) "\C-y" nil))))
       ;; (define-key evil-motion-state-map "\C-wo" nil)))
+
+  ;;; setup spell check & save
+  (load-file "~/.emacs.d/private/local/flyspell-goto-previous-error.el")
+  ;; (global-unset-key (kbd "C-,"))
+  (global-set-key (kbd "C-c ,") 'flyspell-goto-previous-error)
+  (global-set-key (kbd "C-c .") 'flyspell-goto-previous-error-save-word)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
