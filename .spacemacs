@@ -433,8 +433,8 @@ you should place your code here."
   ;;; setup spell check & save
   (load-file "~/.emacs.d/private/local/flyspell-goto-previous-error.el")
   ;; (global-unset-key (kbd "C-,"))
-  (global-set-key (kbd "C-c ,") 'flyspell-goto-previous-error)
-  (global-set-key (kbd "C-c .") 'flyspell-goto-previous-error-save-word)
+  (global-set-key (kbd "C-c ,") 'evil-prev-flyspell-error)
+  (global-set-key (kbd "C-c .") 'evil-prev-flyspell-error-save-word)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
