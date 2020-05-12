@@ -416,6 +416,13 @@ you should place your code here."
       (define-key (eval map) "\C-p" nil)
       (define-key (eval map) "\C-w" 'kill-ring-save)
       (define-key (eval map) "\C-y" nil)))
+
+  ;;; moving to the previous spell error word or add it to the dictionary
+  (load-file "~/.emacs.d/private/local/flyspell-goto-previous-error.el")
+  ;; (global-set-key (kbd "C-c ,") 'flyspell-goto-previous-error)
+  (global-set-key (kbd "C-c ,") 'evil-prev-flyspell-error)
+  ;; (global-set-key (kbd "C-c .") 'flyspell-goto-previous-error-save-word)
+  (global-set-key (kbd "C-c .") 'evil-prev-flyspell-error-save-word)
   ;;;
   )
 
