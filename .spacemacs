@@ -420,6 +420,7 @@ you should place your code here."
                      evil-normal-state-map
                      evil-visual-state-map
                      ))
+        (define-key (eval map) "\C-u" nil)
         (define-key (eval map) "\C-e" nil)
         (define-key (eval map) "\C-a" nil)
         (define-key (eval map) "\C-d" nil)
