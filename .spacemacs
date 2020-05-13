@@ -355,6 +355,7 @@ you should place your code here."
   ;; (global-set-key (kbd "C-M-k") 'delete-region)
   (global-unset-key (kbd "C-M-k"))
   (global-set-key (kbd "C-M-k") 'kill-sexp)
+  (global-set-key [C-M-backspace] 'backward-kill-sexp)
   (setq tramp-default-method "plink")
   ;; It's bound to 'tmm-menuber' default, but will hang the spacemacs, temporary
   ;; disable it.
@@ -420,6 +421,7 @@ you should place your code here."
                      evil-normal-state-map
                      evil-visual-state-map
                      ))
+        (define-key (eval map) [C-M-backspace] nil)
         (define-key (eval map) "\C-u" nil)
         (define-key (eval map) "\C-e" nil)
         (define-key (eval map) "\C-a" nil)
