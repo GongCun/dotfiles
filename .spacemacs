@@ -408,6 +408,7 @@ you should place your code here."
                    evil-normal-state-map
                    evil-visual-state-map
                    evil-emacs-state-map))
+      (define-key (eval map) "\C-u" nil)
       (define-key (eval map) "\C-e" nil)
       (define-key (eval map) "\C-a" nil)
       (define-key (eval map) "\C-d" nil)
@@ -420,7 +421,11 @@ you should place your code here."
   ;;; moving to the previous spell error word or add it to the dictionary
   (load-file "~/.emacs.d/private/local/flyspell-goto-previous-error.el")
   ;; (global-set-key (kbd "C-c ,") 'flyspell-goto-previous-error)
-  (global-set-key (kbd "C-c ,") 'evil-prev-flyspell-error)
+  (global-set-key (kbd "C-c ,")
+                  (lambda ()
+                    (interactive)
+                    (push-mark)
+                    (evil--next-flyspell-error nil)))
   ;; (global-set-key (kbd "C-c .") 'flyspell-goto-previous-error-save-word)
   (global-set-key (kbd "C-c .") 'evil-prev-flyspell-error-save-word)
   ;;;
