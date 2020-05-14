@@ -271,7 +271,8 @@ values."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   ;; dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers 'relative
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -443,6 +444,8 @@ you should place your code here."
  '(Man-notify-method (quote pushy))
  '(c-electric-pound-behavior (quote (alignleft)))
  '(desktop-save-mode t)
+ '(evil-want-C-u-scroll nil)
+ '(evil-want-C-w-delete nil)
  '(evil-want-Y-yank-to-eol nil)
  '(indent-tabs-mode t)
  '(ispell-dictionary "english")
@@ -491,5 +494,4 @@ you should place your code here."
  '(company-tooltip-common-selection ((((class color) (min-colors 89)) (:background "#767676" :foreground "#afd7ff" :bold t))))
  '(font-lock-comment-delimiter-face ((t (:foreground "#b2b2b2" :slant italic))))
  '(font-lock-comment-face ((((class color) (min-colors 89)) (:foreground "#b2b2b2" :slant italic))))
- ;; '(linum ((((class color) (min-colors 89)) (:foreground "#87875f" :background "#d7d7af"))))
  '(sh-heredoc ((t (:foreground "green" :weight bold)))))
