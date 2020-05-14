@@ -422,10 +422,10 @@ you should place your code here."
                      evil-visual-state-map
                      ))
         (define-key (eval map) [C-M-backspace] nil)
-        (define-key (eval map) "\C-u" nil)
+        ;; (define-key (eval map) "\C-u" nil)
         (define-key (eval map) "\C-e" nil)
         (define-key (eval map) "\C-a" nil)
-        (define-key (eval map) "\C-d" nil)
+        ;; (define-key (eval map) "\C-d" nil)
         (define-key (eval map) "\C-k" nil)
         (define-key (eval map) "\C-n" nil)
         (define-key (eval map) "\C-p" nil)
@@ -454,6 +454,9 @@ you should place your code here."
  '(c-basic-offset 4)
  '(c-electric-pound-behavior (quote (alignleft)))
  '(desktop-save-mode t)
+ '(evil-want-C-d-scroll nil)
+ '(evil-want-C-u-scroll nil)
+ '(evil-want-C-w-delete nil)
  '(evil-want-Y-yank-to-eol nil)
  '(explicit-bash-args (quote ("--noediting")))
  '(org-agenda-files
