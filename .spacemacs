@@ -271,8 +271,8 @@ values."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   ;; dotspacemacs-line-numbers nil
-   dotspacemacs-line-numbers 'relative
+   dotspacemacs-line-numbers nil
+   ;; dotspacemacs-line-numbers 'relative
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -414,7 +414,7 @@ you should place your code here."
       ;; (define-key (eval map) "\C-u" nil)
       (define-key (eval map) "\C-e" nil)
       (define-key (eval map) "\C-a" nil)
-      (define-key (eval map) "\C-d" nil)
+      ;; (define-key (eval map) "\C-d" nil)
       (define-key (eval map) "\C-k" nil)
       (define-key (eval map) "\C-n" nil)
       (define-key (eval map) "\C-p" nil)
@@ -431,6 +431,9 @@ you should place your code here."
                     (evil--next-flyspell-error nil)))
   ;; (global-set-key (kbd "C-c .") 'flyspell-goto-previous-error-save-word)
   (global-set-key (kbd "C-c .") 'evil-prev-flyspell-error-save-word)
+
+  ;;; Enable window-numbering-mode and use M-1 through M-0 to navigate.
+  (spaceline-toggle-window-number-on)
   ;;;
   )
 
@@ -445,6 +448,7 @@ you should place your code here."
  '(c-electric-pound-behavior (quote (alignleft)))
  '(desktop-save-mode t)
  '(evil-want-C-u-scroll nil)
+ '(evil-want-C-d-scroll nil)
  '(evil-want-C-w-delete nil)
  '(evil-want-Y-yank-to-eol nil)
  '(indent-tabs-mode t)
