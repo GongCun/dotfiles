@@ -31,7 +31,19 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     themes-megapack
+     git
+     yaml
      markdown
+     (shell :variables shell-enable-smart-eshell t)
+     (shell :variables
+            shell-default-height 30
+            shell-default-position 'top
+            shell-default-shell 'shell)
+     auto-completion
+     html
+     spell-checking
+     syntax-checking
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -49,7 +61,7 @@ values."
      ;;        shell-default-position 'bottom)
      ;; spell-checking
      ;; syntax-checking
-     ;; version-control
+     version-control
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -313,16 +325,117 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (load-file "~/.emacs.d/private/local/.myemacs")
-  ;; (setq tab-width 8)
+  (setq tab-width 8)
 	;; use spaces instead of tabs
   (setq-default indent-tabs-mode nil)
+  ;; disable mouse
+  (setq-default xterm-mouse-mode nil)
+
+  ;; seems no work
   (add-hook 'diff-mode-hook
             (lambda ()
+              (setq-local whitespace-mode nil)
               (global-whitespace-mode -1)
               (whitespace-mode -1)))
-  ;; (add-hook 'diff-mode-hook 'whitespace-mode)
-  ;; (spacemacs/toggle-whitespace-globally-off)
 
+
+  ;; seems not work, but keep here
+  (setq c-default-style "linux"
+        c-basic-offset 4)
+  (add-to-list 'c-offsets-alist '(substatement-open . 0))
+
+  (global-unset-key (kbd "C-w"))
+  (global-set-key (kbd "C-w") 'kill-ring-save)
+  (global-unset-key (kbd "M-w"))
+  (global-set-key (kbd "M-w") 'kill-region)
+  (global-unset-key (kbd "M-a"))
+  (global-set-key (kbd "M-a") 'back-to-indentation)
+  (global-company-mode)
+  (setq ac-auto-start 4
+        ac-auto-show-menu 0.8)
+
+  (global-set-key "\M-'" 'auto-complete-mode)
+  ;; (global-set-key "\M-/" 'dabbrev-expand)
+  (global-set-key (kbd "C-S-j") 'delete-indentation)
+  (global-set-key (kbd "C-S-k") 'delete-region)
+  ;; (global-set-key (kbd "C-M-k") 'delete-region)
+  (global-unset-key (kbd "C-M-k"))
+  (global-set-key (kbd "C-M-k") 'kill-sexp)
+  (global-set-key [C-M-backspace] 'backward-kill-sexp)
+  ;; (setq tramp-default-method "plink")
+  ;; It's bound to 'tmm-menuber' default, but will hang the spacemacs, temporary
+  ;; disable it.
+  (global-unset-key (kbd "M-`"))
+  (global-set-key "\M-`" 'auto-fill-mode)
+  (global-set-key (kbd "C-M-`") 'not-modified)
+
+  (global-unset-key "\C-x\C-l")
+  (global-set-key "\C-x\C-l" 'recenter-top-bottom)
+
+  (defun scroll-up-one () "Scroll up 1 line." (interactive)
+         (scroll-up (prefix-numeric-value current-prefix-arg)))
+  (defun scroll-down-one () "Scroll down 1 line." (interactive)
+         (scroll-down (prefix-numeric-value current-prefix-arg)))
+
+  (global-unset-key "\C-l")
+  (global-set-key "\C-l" 'scroll-up-one)
+
+  (global-unset-key "\M-l")
+  (global-set-key "\M-l" 'scroll-down-one)
+  (add-to-list 'evil-emacs-state-modes 'vc-git-log-edit-mode)
+  (eval-after-load "evil-maps"
+    (define-key evil-motion-state-map "\C-wo" nil))
+  (add-to-list 'evil-emacs-state-modes 'shell-mode)
+  (add-to-list 'evil-emacs-state-modes 'eshell-mode)
+
+  ;; (global-unset-key (kbd "M-m SPC"))
+  ;; (global-set-key (kbd "M-m SPC") (lambda () (interactive) (other-window 1)))
+  ;; (global-set-key (kbd "M-m M-m") (lambda () (interactive) (unexpand-abbrev)))
+  (global-set-key (kbd "M-m d") 'downcase-word)
+  (global-set-key (kbd "M-m SPC") 'other-window)
+  (global-set-key (kbd "M-m M-m") 'unexpand-abbrev)
+  (global-set-key (kbd "M-m h") 'windmove-left)
+  (global-set-key (kbd "M-m j") 'windmove-down)
+  (global-set-key (kbd "M-m k") 'windmove-up)
+  (global-set-key (kbd "M-m l") 'windmove-right)
+  (global-set-key (kbd "M-m u") 'winner-undo)
+  (global-set-key (kbd "M-m U") 'winner-redo)
+
+
+  (load-file "~/.emacs.d/private/local/send-previous-input-to-shell.el")
+  (global-set-key (kbd "M-m C-e") 'send-previous-input-to-shell)
+  (global-set-key (kbd "M-m C-d") 'shell-cd-current-directory)
+  ;; maybe should (load-file .myemacs) here
+  (require 'evil)
+  (eval-after-load "evil-map"
+    (progn
+      (dolist (map '(evil-motion-state-map
+                     evil-insert-state-map
+                     evil-normal-state-map
+                     evil-visual-state-map
+                     ))
+        (define-key (eval map) [C-M-backspace] nil)
+        ;; (define-key (eval map) "\C-u" nil)
+        (define-key (eval map) "\C-e" nil)
+        (define-key (eval map) "\C-a" nil)
+        ;; (define-key (eval map) "\C-d" nil)
+        (define-key (eval map) "\C-k" nil)
+        (define-key (eval map) "\C-n" nil)
+        (define-key (eval map) "\C-p" nil)
+        (define-key (eval map) "\C-w" 'kill-ring-save)
+        (define-key (eval map) "\C-y" nil))))
+      ;; (define-key evil-motion-state-map "\C-wo" nil)))
+
+  ;;; setup spell check & save
+  (load-file "~/.emacs.d/private/local/flyspell-goto-previous-error.el")
+  ;; (global-unset-key (kbd "C-,"))
+  ;; (global-set-key (kbd "C-c ,") 'evil-prev-flyspell-error)
+  (global-set-key (kbd "C-c ,")
+                  (lambda () (interactive) (push-mark)
+                    (evil--next-flyspell-error nil)))
+  (global-set-key (kbd "C-c .") 'evil-prev-flyspell-error-save-word)
+
+  ;;;
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

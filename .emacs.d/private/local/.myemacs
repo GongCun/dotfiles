@@ -1,14 +1,27 @@
-;; Some functions and hooks
+;;; Some functions and hooks
+
+;; (global-linum-mode 1)
 (defun my-linum-mode-hook ()
   (when linum-mode
     (setq-local linum-format
                 (let ((w (length (number-to-string
                                   (count-lines (point-min) (point-max))))))
-                  (concat "%" (number-to-string w) "d  ")))))
+                  (concat "%" (number-to-string w) "d ")))))
+;; (add-hook 'linum-mode-hook #'my-linum-mode-hook)
 
-(add-hook 'linum-mode-hook #'my-linum-mode-hook)
-;; (global-linum-mode 1)
+(defun my-linum-format-string ()
+  (setq-local linum-format
+              (let ((w (length (number-to-string
+                                (count-lines (point-min) (point-max))))))
+                (concat "%" (number-to-string w) "d "))))
+;; (add-hook 'linum-before-numbering-hook #'my-linum-format-string)
 
+(add-hook 'prog-mode-hook 'linum-mode)
+(when (version<= "26.1" emacs-version)
+  (setq linum-relative-backend 'display-line-numbers-mode))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun set-c-toggle-hungry-state()
   (c-toggle-hungry-state 1))
 
@@ -18,7 +31,6 @@
             (flyspell-prog-mode)
             (turn-on-auto-fill)
             (c-toggle-auto-state 1)
-            (c-toggle-auto-newline 0)
             ))
 (add-hook 'c-mode-hook 'set-c-toggle-hungry-state)
 
@@ -28,13 +40,11 @@
             (flyspell-prog-mode)
             (turn-on-auto-fill)
             (c-toggle-auto-state 1)
-            (c-toggle-auto-newline 0)
             ))
 (add-hook 'c++-mode-hook 'set-c-toggle-hungry-state)
 
 (c-add-style "linux"
              '((c-basic-offset . 4)
-               (c-set-offset 'substatement-open 0)
                (c-offsets-alist
                 (statement-cont . c-lineup-assignments)
                 (arglist-close . 0)
@@ -58,11 +68,18 @@
             (flyspell-prog-mode)))
 
 ;; some customize keybind
+(global-unset-key [f5])
+(global-set-key [f5] 'abbrev-mode)
+(global-unset-key [f6])
+(global-set-key [f6] 'browse-url)
+;; (global-set-key [f6] 'menu-bar-open)
+(global-set-key [f7] 'holy-mode)
 (global-set-key [f8] 'compile)
 (global-set-key [f9] 'ispell-word)
 (global-set-key [f10] 'flyspell-mode)
 (global-set-key [f11] 'string-insert-rectangle)
-(global-set-key [f12] 'linum-mode)
+;; (global-set-key [f12] 'linum-mode)
+(global-set-key [f12] 'linum-relative-toggle)
 (global-set-key (kbd "\C-xI") 'insert-buffer)
 
 (progn
@@ -71,18 +88,15 @@
   (define-key dired-mode-map (kbd "2") 'delete-window)
   (define-key dired-mode-map (kbd "3") 'delete-other-windows)
   (define-key dired-mode-map (kbd "4") 'split-window-below)
-  (define-key dired-mode-map (kbd "\C-o") 'find-file))
+  (define-key dired-mode-map (kbd "C-o") 'find-file))
 
 (add-hook 'org-mode-hook
           (lambda ()
-            ;; (define-key org-mode-map "\M-m" 'back-to-indentation)
-            (abbrev-mode)
+            (setq org-indent-mode nil)
             (define-key org-mode-map "\C-cl" 'org-store-link)
             (define-key org-mode-map "\C-ca" 'org-agenda)))
 
-;;
-(global-auto-revert-mode 1)
+(setenv "LC_ALL" "C")
+(setenv "GIT_PAGER" "cat")
+(setenv "DISPLAY" "127.0.0.1:5000")
 
-
-(add-hook 'diff-mode-hook
-          (lambda () (whitespace-mode nil)))
