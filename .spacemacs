@@ -441,6 +441,9 @@ you should place your code here."
                   (lambda () (interactive) (push-mark)
                     (evil--next-flyspell-error nil)))
   (global-set-key (kbd "C-c .") 'evil-prev-flyspell-error-save-word)
+
+  ;;;
+  (spaceline-toggle-window-number-on)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
