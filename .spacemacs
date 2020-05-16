@@ -361,7 +361,7 @@ you should place your code here."
   ;; (global-set-key (kbd "C-M-k") 'delete-region)
   (global-unset-key (kbd "C-M-k"))
   (global-set-key (kbd "C-M-k") 'kill-sexp)
-  (global-set-key [C-M-backspace] 'backward-kill-sexp)
+  (global-set-key (kbd "C-M-_") 'backward-kill-sexp)
   ;; (setq tramp-default-method "plink")
   ;; It's bound to 'tmm-menuber' default, but will hang the spacemacs, temporary
   ;; disable it.
@@ -434,6 +434,34 @@ you should place your code here."
                   (lambda () (interactive) (push-mark)
                     (evil--next-flyspell-error nil)))
   (global-set-key (kbd "C-c .") 'evil-prev-flyspell-error-save-word)
+
+  ;;;
+  (add-to-list 'load-path "~/.emacs.d/lisp")
+
+  (defun my-setup-sh-mode ()
+    (interactive)
+    (setq sh-basic-offset 4
+          sh-indentation 4
+          indent-tabs-mode nil))
+
+  (require 'essh)
+  (defun essh-sh-hook ()
+    (define-key sh-mode-map "\C-c\C-r" 'pipe-region-to-shell)
+    (define-key sh-mode-map "\C-c\C-b" 'pipe-buffer-to-shell)
+    (define-key sh-mode-map "\C-c\C-j" 'pipe-line-to-shell)
+    (define-key sh-mode-map "\C-c\C-n" 'pipe-line-to-shell-and-step)
+    (define-key sh-mode-map "\C-c\C-f" 'pipe-function-to-shell)
+    (define-key sh-mode-map "\C-c\C-d" 'shell-cd-current-directory))
+
+  (add-hook 'sh-mode-hook
+            (lambda ()
+              (my-setup-sh-mode)
+              (sh-electric-here-document-mode -1)
+              (essh-sh-hook)))
+
+  (add-hook 'shell-mode-hook
+            (lambda ()
+              (local-set-key "\C-cl" 'comint-clear-buffer)))
 
   ;;;
   )
