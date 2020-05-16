@@ -1,0 +1,42 @@
+#escape ^|^|
+#escape ^Bb
+escape ^Aa
+
+# Unbind the <PREFIX C-x>
+bind ^x
+
+# Make Vim ESC key quick
+maptimeout 5
+
+# Enable 256 color term
+term xterm-256color
+
+shell /bin/bash
+
+# screen password
+# password <password>
+
+
+################################
+## From: https://gist.github.com/ChrisWills/1337178
+## Author: Christian Wills - cwills.sys@gmail.com
+
+# Allow bold colors - necessary for some reason
+attrcolor b ".I"
+
+# Erase background with current bg color
+defbce "on"
+
+hardstatus alwayslastline
+
+# Very nice tabbed colored hardstatus line
+hardstatus string '%{= Kd} %{= Kd}%-w%{= Kr}[%{= KW}%n %t%{= Kr}]%{= Kd}%+w %-= %{KG} %H%{KW}|%{KY}%101`%{KW}|%D %M %d %Y%{= Kc} %C%A%{-}'
+
+# Hide hardstatus: PREFIX f
+bind f eval "hardstatus ignore"
+# Show hardstatus: PREFIX F
+bind F eval "hardstatus alwayslastline"
+################################
+
+bind r eval "source ~/.screenrc" "echo Reload!"
+defscrollback 10000
