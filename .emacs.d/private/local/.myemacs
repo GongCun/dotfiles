@@ -16,10 +16,12 @@
                 (concat "%" (number-to-string w) "d "))))
 ;; (add-hook 'linum-before-numbering-hook #'my-linum-format-string)
 
-(add-hook 'prog-mode-hook 'linum-mode)
-(when (version<= "26.1" emacs-version)
-  (setq linum-relative-backend 'display-line-numbers-mode))
+;; (add-hook 'prog-mode-hook 'linum-mode)
+;; (when (version<= "26.1" emacs-version)
+  ;; (setq linum-relative-backend 'display-line-numbers-mode))
 
+(when (version<= "26.1" emacs-version)
+  (add-hook 'prog-mode-hook 'display-line-numbers-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun set-c-toggle-hungry-state()
