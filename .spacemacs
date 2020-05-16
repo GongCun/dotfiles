@@ -418,7 +418,7 @@ you should place your code here."
         ;; (define-key (eval map) "\C-u" nil)
         (define-key (eval map) "\C-e" nil)
         (define-key (eval map) "\C-a" nil)
-        ;; (define-key (eval map) "\C-d" nil)
+        (define-key (eval map) "\C-d" nil)
         (define-key (eval map) "\C-k" nil)
         (define-key (eval map) "\C-n" nil)
         (define-key (eval map) "\C-p" nil)
@@ -473,6 +473,7 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(Man-notify-method (quote pushy))
  '(evil-want-C-d-scroll nil)
  '(evil-want-C-u-scroll nil)
  '(evil-want-C-w-delete nil)
