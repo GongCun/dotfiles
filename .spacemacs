@@ -31,6 +31,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     debug
      ;; themes-megapack
      git
      yaml
@@ -354,7 +355,8 @@ you should place your code here."
   (setq ac-auto-start 4
         ac-auto-show-menu 0.8)
 
-  (global-set-key "\M-'" 'auto-complete-mode)
+  ;; (global-set-key "\M-'" 'auto-complete-mode)
+  (global-set-key "\M-'" 'company-mode)
   ;; (global-set-key "\M-/" 'dabbrev-expand)
   (global-set-key (kbd "C-S-j") 'delete-indentation)
   (global-set-key (kbd "C-S-k") 'delete-region)
