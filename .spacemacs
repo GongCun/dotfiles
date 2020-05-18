@@ -140,7 +140,8 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
+   dotspacemacs-themes '(deeper-blue
+                         spacemacs-dark
                          spacemacs-light)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
@@ -466,6 +467,11 @@ you should place your code here."
             (lambda ()
               (local-set-key "\C-cl" 'comint-clear-buffer)))
 
+  ;;; want to disable the whitespace-mode but not work. custom diff-mode-hook to
+  ;;; resolve it.
+  (defun turn-off-whitespace-mode ()
+    (whitespace-mode))
+  (add-hook 'diff-mode-hook #'turn-off-whitespace-mode)
   ;;;
   )
 
@@ -477,10 +483,14 @@ you should place your code here."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(Man-notify-method (quote pushy))
+ '(ansi-color-names-vector
+   ["#080808" "#d70000" "#67b11d" "#875f00" "#268bd2" "#af00df" "#00ffff" "#b2b2b2"])
+ '(diff-mode-hook (quote (spacemacs//set-whitespace-style-for-diff)))
  '(display-line-numbers-type (quote relative))
  '(evil-want-C-d-scroll nil)
  '(evil-want-C-u-scroll nil)
  '(evil-want-C-w-delete nil)
+ '(evil-want-Y-yank-to-eol nil)
  '(global-display-line-numbers-mode t)
  '(package-selected-packages
    (quote
