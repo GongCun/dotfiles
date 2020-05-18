@@ -457,6 +457,7 @@ you should place your code here."
  '(c-basic-offset 4)
  '(c-electric-pound-behavior (quote (alignleft)))
  '(desktop-save-mode t)
+ '(diff-mode-hook (quote (spacemacs//set-whitespace-style-for-diff)))
  '(evil-want-C-d-scroll nil)
  '(evil-want-C-u-scroll nil)
  '(evil-want-C-w-delete nil)
