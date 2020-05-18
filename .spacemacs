@@ -434,6 +434,14 @@ you should place your code here."
 
   ;;; Enable window-numbering-mode and use M-1 through M-0 to navigate.
   (spaceline-toggle-window-number-on)
+
+  ;;; Disable whitespace-mode in diff
+  ;; (global-whitespace-mode nil) ;; DO NOT uncomment me
+  ;; not work but keep here
+  (defun turn-off-whitespace-mode ()
+    "Unconditionally turn off whitespace mode."
+    (setq-local whitespace-mode nil))
+  (add-hook 'diff-mode-hook #'turn-off-whitespace-mode)
   ;;;
   )
 
