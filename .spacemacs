@@ -330,7 +330,8 @@ you should place your code here."
 	;; use spaces instead of tabs
   (setq-default indent-tabs-mode nil)
   ;; disable mouse
-  (setq-default xterm-mouse-mode nil)
+  ;; (setq-default xterm-mouse-mode nil)
+  (xterm-mouse-mode -1)
 
   ;; seems no work
   (add-hook 'diff-mode-hook

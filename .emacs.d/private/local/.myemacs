@@ -18,7 +18,9 @@
 
 ;; (add-hook 'prog-mode-hook 'linum-mode)
 (when (version<= "26.1" emacs-version)
-  (setq linum-relative-backend 'display-line-numbers-mode))
+  ;; (add-hook 'prog-mode-hook 'display-line-numbers-mode)
+    (global-display-line-numbers-mode t)
+    (setq-default linum-relative-backend 'display-line-numbers-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -79,7 +81,9 @@
 (global-set-key [f10] 'flyspell-mode)
 (global-set-key [f11] 'string-insert-rectangle)
 ;; (global-set-key [f12] 'linum-mode)
-(global-set-key [f12] 'linum-relative-toggle)
+(if (version<= "26.1" emacs-version)
+    (global-set-key [f12] 'display-line-numbers-mode)
+  (global-set-key [f12] 'linum-relative-toggle))
 (global-set-key (kbd "\C-xI") 'insert-buffer)
 
 (progn
