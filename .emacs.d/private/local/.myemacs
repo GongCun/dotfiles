@@ -18,9 +18,7 @@
 
 ;; (add-hook 'prog-mode-hook 'linum-mode)
 (when (version<= "26.1" emacs-version)
-  ;; (add-hook 'prog-mode-hook 'display-line-numbers-mode)
-    (global-display-line-numbers-mode t)
-    (setq-default linum-relative-backend 'display-line-numbers-mode))
+    (global-display-line-numbers-mode t))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
