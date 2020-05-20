@@ -441,7 +441,7 @@ you should place your code here."
   (defun turn-off-whitespace-mode ()
     "Unconditionally turn off whitespace mode."
     (setq-local whitespace-mode nil))
-  (add-hook 'diff-mode-hook #'turn-off-whitespace-mode)
+  ;; (add-hook 'diff-mode-hook #'turn-off-whitespace-mode)
   ;;;
   )
 
@@ -455,8 +455,9 @@ you should place your code here."
  '(Man-notify-method (quote pushy))
  '(c-electric-pound-behavior (quote (alignleft)))
  '(desktop-save-mode t)
- '(evil-want-C-u-scroll nil)
+ '(diff-mode-hook (quote (spacemacs//set-whitespace-style-for-diff)))
  '(evil-want-C-d-scroll nil)
+ '(evil-want-C-u-scroll nil)
  '(evil-want-C-w-delete nil)
  '(evil-want-Y-yank-to-eol nil)
  '(indent-tabs-mode t)
