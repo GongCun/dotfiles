@@ -75,7 +75,7 @@ values."
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '(evil-escape)
+   dotspacemacs-excluded-packages '(evil-escape auto-complete)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and uninstall any
@@ -348,7 +348,8 @@ you should place your code here."
   (setq ac-auto-start 4
         ac-auto-show-menu 0.8)
 
-  (global-set-key "\M-'" 'auto-complete-mode)
+  ;; (global-set-key "\M-'" 'auto-complete-mode)
+  (global-set-key "\M-'" 'company-mode)
   ;; (global-set-key "\M-/" 'dabbrev-expand)
   (global-set-key (kbd "C-S-j") 'delete-indentation)
   (global-set-key (kbd "C-S-k") 'delete-region)
@@ -444,6 +445,9 @@ you should place your code here."
 
   ;;;
   (spaceline-toggle-window-number-on)
+
+  ;;;
+  (add-hook 'after-init-hook 'global-company-mode)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
