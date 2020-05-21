@@ -446,8 +446,18 @@ you should place your code here."
   ;;;
   (spaceline-toggle-window-number-on)
 
+  ;;; remove whitespace-mode
+  (let ((i 0)
+        (len (length diff-mode-hook)))
+    (while (< i len)
+      (if (string= "whitespace-mode" (prin1-to-string (elt diff-mode-hook i)))
+          (remove-hook 'diff-mode-hook 'whitespace-mode))
+      (setq i (1+ i))))
+
   ;;;
   (add-hook 'after-init-hook 'global-company-mode)
+
+  ;;;
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
