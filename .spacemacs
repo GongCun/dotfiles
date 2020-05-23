@@ -440,6 +440,7 @@ you should place your code here."
   ;; (global-set-key (kbd "C-c ,") 'evil-prev-flyspell-error)
   (define-key org-mode-map (kbd "C-c ,") nil)
   (define-key org-mode-map (kbd "C-c .") nil)
+  (define-key org-mode-map (kbd "M-a") nil)
   (global-set-key (kbd "C-c ,")
                   (lambda () (interactive) (push-mark)
                     (evil--next-flyspell-error nil)))
