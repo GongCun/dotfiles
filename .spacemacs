@@ -438,6 +438,8 @@ you should place your code here."
   (load-file "~/.emacs.d/private/local/flyspell-goto-previous-error.el")
   ;; (global-unset-key (kbd "C-,"))
   ;; (global-set-key (kbd "C-c ,") 'evil-prev-flyspell-error)
+  (define-key org-mode-map (kbd "C-c ,") nil)
+  (define-key org-mode-map (kbd "C-c .") nil)
   (global-set-key (kbd "C-c ,")
                   (lambda () (interactive) (push-mark)
                     (evil--next-flyspell-error nil)))
