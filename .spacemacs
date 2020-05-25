@@ -433,6 +433,14 @@ you should place your code here."
   ;; (global-set-key (kbd "C-c .") 'flyspell-goto-previous-error-save-word)
   (global-set-key (kbd "C-c .") 'evil-prev-flyspell-error-save-word)
 
+  ;;; Remove key-mapping from org-mode
+  (with-eval-after-load "org"
+    (progn
+      (define-key org-mode-map (kbd "C-c ,") nil)
+      (define-key org-mode-map (kbd "C-c .") nil)
+      (define-key org-mode-map (kbd "C-c k") nil)
+      ))
+
   ;;; Enable window-numbering-mode and use M-1 through M-0 to navigate.
   (spaceline-toggle-window-number-on)
 
