@@ -436,11 +436,6 @@ you should place your code here."
 
   ;;; setup spell check & save
   (load-file "~/.emacs.d/private/local/flyspell-goto-previous-error.el")
-  ;; (global-unset-key (kbd "C-,"))
-  ;; (global-set-key (kbd "C-c ,") 'evil-prev-flyspell-error)
-  (define-key org-mode-map (kbd "C-c ,") nil)
-  (define-key org-mode-map (kbd "C-c .") nil)
-  (define-key org-mode-map (kbd "M-a") nil)
   (global-set-key (kbd "C-c ,")
                   (lambda () (interactive) (push-mark)
                     (evil--next-flyspell-error nil)))
@@ -448,6 +443,16 @@ you should place your code here."
 
   ;;;
   (spaceline-toggle-window-number-on)
+
+  ;;; Remove key-mapping from org-mode
+  (with-eval-after-load "org"
+    (progn
+      (define-key org-mode-map (kbd "M-a") nil)
+      (define-key org-mode-map (kbd "C-c ,") nil)
+      (define-key org-mode-map (kbd "C-c .") nil)
+      (define-key org-mode-map (kbd "C-c k") nil)
+      ))
+
 
   ;;; remove whitespace-mode
   (let ((i 0)
