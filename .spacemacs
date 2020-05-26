@@ -436,6 +436,7 @@ you should place your code here."
   ;;; Remove key-mapping from org-mode
   (with-eval-after-load "org"
     (progn
+      (define-key org-mode-map (kbd "M-a") nil)
       (define-key org-mode-map (kbd "C-c ,") nil)
       (define-key org-mode-map (kbd "C-c .") nil)
       (define-key org-mode-map (kbd "C-c k") nil)
