@@ -451,8 +451,13 @@ you should place your code here."
       (define-key org-mode-map (kbd "C-c ,") nil)
       (define-key org-mode-map (kbd "C-c .") nil)
       (define-key org-mode-map (kbd "C-c k") nil)
+      (define-key org-mode-map (kbd "C-c C-'") 'org-edit-special)
       ))
 
+  (add-hook 'org-src-mode-hook
+            (lambda ()
+              (local-set-key (kbd "C-c C-'") 'org-edit-src-exit)))
+  ;; (define-key org-src-mode-hook (kbd "C-c C-'") 'org-edit-src-exit)
 
   ;;; remove whitespace-mode
   (let ((i 0)
@@ -530,4 +535,5 @@ you should place your code here."
  '(company-tooltip-common-selection ((((class color) (min-colors 89)) (:background "#767676" :foreground "#afd7ff" :bold t))))
  '(font-lock-comment-delimiter-face ((t (:foreground "#b2b2b2" :slant italic))))
  '(font-lock-comment-face ((((class color) (min-colors 89)) (:foreground "#b2b2b2" :slant italic))))
+ '(font-lock-constant-face ((t (:foreground "forest green" :slant italic :weight bold))))
  '(sh-heredoc ((t (:foreground "medium sea green" :weight bold)))))
