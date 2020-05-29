@@ -440,7 +440,12 @@ you should place your code here."
       (define-key org-mode-map (kbd "C-c ,") nil)
       (define-key org-mode-map (kbd "C-c .") nil)
       (define-key org-mode-map (kbd "C-c k") nil)
+      (define-key org-mode-map (kbd "C-c C-'") 'org-edit-special)
       ))
+  (add-hook 'org-src-mode-hook
+            (lambda ()
+              (local-set-key (kbd "C-c C-'") 'org-edit-src-exit)))
+  ;; (define-key org-src-mode-hook (kbd "C-c C-'") 'org-edit-src-exit)
 
   ;;; Enable window-numbering-mode and use M-1 through M-0 to navigate.
   (spaceline-toggle-window-number-on)
