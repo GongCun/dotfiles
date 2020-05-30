@@ -456,7 +456,8 @@ you should place your code here."
 
   (add-hook 'org-src-mode-hook
             (lambda ()
-              (local-set-key (kbd "C-c C-'") 'org-edit-src-exit)))
+              (local-set-key (kbd "C-c C-'") 'org-edit-src-exit)
+              (delete-other-windows)))
   ;; (define-key org-src-mode-hook (kbd "C-c C-'") 'org-edit-src-exit)
 
   ;;; remove whitespace-mode
