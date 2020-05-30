@@ -534,4 +534,5 @@ you should place your code here."
  '(company-tooltip-common-selection ((((class color) (min-colors 89)) (:background "#767676" :foreground "#afd7ff" :bold t))))
  '(font-lock-comment-delimiter-face ((t (:foreground "#b2b2b2" :slant italic))))
  '(font-lock-comment-face ((((class color) (min-colors 89)) (:foreground "#b2b2b2" :slant italic))))
+ '(font-lock-constant-face ((t (:foreground "forest green" :slant italic :weight bold))))
  '(sh-heredoc ((t (:foreground "green" :weight bold)))))
