@@ -484,6 +484,15 @@ you should place your code here."
  '(Man-notify-method (quote pushy))
  '(c-basic-offset 4)
  '(c-electric-pound-behavior (quote (alignleft)))
+ '(c-mode-hook
+   (quote
+    (macrostep-c-mode-hook set-c-toggle-hungry-state
+                           (lambda nil
+                             (c-set-style "linux")
+                             (flyspell-prog-mode)
+                             (turn-on-auto-fill)
+                             (c-toggle-auto-state 1)
+                             (c-toggle-auto-newline 1)))))
  '(desktop-save-mode t)
  '(diff-mode-hook (quote (spacemacs//set-whitespace-style-for-diff)))
  '(evil-want-C-d-scroll nil)
