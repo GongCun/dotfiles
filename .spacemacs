@@ -454,8 +454,18 @@ you should place your code here."
       (define-key org-mode-map (kbd "C-c C-'") 'org-edit-special)
       ))
 
+  (defun check-evil-mode ()
+    (let ((list minor-mode-list))
+      (while list
+        (if (string-match "\\<evil-mode\\>" (prin1-to-string (car list)))
+            (evil-emacs-state))
+        (setq list (cdr list)))))
+
   (add-hook 'org-src-mode-hook
             (lambda ()
+              ;; (setq-local evil-default-state 'emacs)
+              ;; (evil-emacs-state)
+              (check-evil-mode)
               (local-set-key (kbd "C-c C-'") 'org-edit-src-exit)
               (delete-other-windows)))
   ;; (define-key org-src-mode-hook (kbd "C-c C-'") 'org-edit-src-exit)
@@ -470,6 +480,9 @@ you should place your code here."
 
   ;;;
   (add-hook 'after-init-hook 'global-company-mode)
+
+  ;;;
+  (add-hook 'emacs-lisp-mode-hook 'hungry-delete-mode)
 
   ;;;
   )
