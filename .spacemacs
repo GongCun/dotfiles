@@ -444,6 +444,7 @@ you should place your code here."
       ))
   (add-hook 'org-src-mode-hook
             (lambda ()
+              (delete-other-windows)
               (local-set-key (kbd "C-c C-'") 'org-edit-src-exit)))
   ;; (define-key org-src-mode-hook (kbd "C-c C-'") 'org-edit-src-exit)
 
