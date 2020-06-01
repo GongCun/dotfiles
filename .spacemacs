@@ -470,6 +470,17 @@ you should place your code here."
   ;;;
   (add-hook 'after-init-hook 'global-company-mode)
 
+  ;; ;;; c-mode-hook
+  ;; (add-hook 'c-mode-hook
+  ;;           (lambda ()
+  ;;             (c-set-style "linux")
+  ;;             (flyspell-prog-mode)
+  ;;             (turn-on-auto-fill)
+  ;;             (c-toggle-auto-state 1)
+  ;;             (c-toggle-auto-newline 1)
+  ;;             (c-toggle-hungry-state 1)
+  ;;             ))
+
   ;;;
   )
 
@@ -482,6 +493,15 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(Man-notify-method (quote pushy))
  '(c-electric-pound-behavior (quote (alignleft)))
+ '(c-mode-hook
+   (quote
+    ((lambda nil
+       (c-set-style "linux")
+       (flyspell-prog-mode)
+       (turn-on-auto-fill)
+       (c-toggle-auto-state 1)
+       (c-toggle-auto-newline 1)
+       (c-toggle-hungry-state 1)))))
  '(desktop-save-mode t)
  '(diff-mode-hook (quote (spacemacs//set-whitespace-style-for-diff)))
  '(evil-want-C-d-scroll nil)
