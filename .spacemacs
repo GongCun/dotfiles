@@ -448,6 +448,22 @@ you should place your code here."
               (local-set-key (kbd "C-c C-'") 'org-edit-src-exit)))
   ;; (define-key org-src-mode-hook (kbd "C-c C-'") 'org-edit-src-exit)
 
+  (defun check-evil-mode ()
+    (let ((list minor-mode-list))
+      (while list
+        (if (string-match "\\<evil-mode\\>" (prin1-to-string (car list)))
+            (evil-emacs-state))
+        (setq list (cdr list)))))
+
+  (add-hook 'org-src-mode-hook
+            (lambda ()
+              ;; (setq-local evil-default-state 'emacs)
+              ;; (evil-emacs-state)
+              (check-evil-mode)
+              (local-set-key (kbd "C-c C-'") 'org-edit-src-exit)
+              (delete-other-windows)))
+  ;; (define-key org-src-mode-hook (kbd "C-c C-'") 'org-edit-src-exit)
+
   ;;; Enable window-numbering-mode and use M-1 through M-0 to navigate.
   (spaceline-toggle-window-number-on)
 
@@ -469,6 +485,9 @@ you should place your code here."
 
   ;;;
   (add-hook 'after-init-hook 'global-company-mode)
+
+  ;;;
+  (add-hook 'emacs-lisp-mode-hook 'hungry-delete-mode)
 
   ;; ;;; c-mode-hook
   ;; (add-hook 'c-mode-hook
