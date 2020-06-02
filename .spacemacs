@@ -373,6 +373,7 @@ you should place your code here."
   (add-to-list 'evil-emacs-state-modes 'vc-git-log-edit-mode)
   (add-to-list 'evil-emacs-state-modes 'shell-mode)
   (add-to-list 'evil-emacs-state-modes 'eshell-mode)
+  (add-to-list 'evil-emacs-state-modes 'text-mode)
 
   ;; (global-unset-key (kbd "M-m SPC"))
   ;; (global-set-key (kbd "M-m SPC") (lambda () (interactive) (other-window 1)))
