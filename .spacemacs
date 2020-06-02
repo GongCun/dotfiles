@@ -441,6 +441,7 @@ you should place your code here."
       (define-key org-mode-map (kbd "C-c .") nil)
       (define-key org-mode-map (kbd "C-c k") nil)
       (define-key org-mode-map (kbd "C-c C-'") 'org-edit-special)
+      (define-key org-mode-map (kbd "C-c C-x C-f") 'org-footnote-action)
       ))
   (add-hook 'org-src-mode-hook
             (lambda ()
@@ -461,6 +462,7 @@ you should place your code here."
               ;; (evil-emacs-state)
               (check-evil-mode)
               (local-set-key (kbd "C-c C-'") 'org-edit-src-exit)
+              (local-set-key (kbd "C-c C-x C-f") 'org-footnote-action)
               (delete-other-windows)))
   ;; (define-key org-src-mode-hook (kbd "C-c C-'") 'org-edit-src-exit)
 
