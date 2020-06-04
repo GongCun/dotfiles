@@ -442,7 +442,7 @@ you should place your code here."
       (define-key org-mode-map (kbd "C-c .") nil)
       (define-key org-mode-map (kbd "C-c k") nil)
       (define-key org-mode-map (kbd "C-c C-'") 'org-edit-special)
-      (define-key org-mode-map (kbd "C-c C-x C-f") 'org-footnote-action)
+      ;; (define-key org-mode-map (kbd "C-c C-x C-f") 'org-footnote-action)
       ))
   (add-hook 'org-src-mode-hook
             (lambda ()
@@ -457,14 +457,24 @@ you should place your code here."
             (evil-emacs-state))
         (setq list (cdr list)))))
 
-  (add-hook 'org-src-mode-hook
-            (lambda ()
-              ;; (setq-local evil-default-state 'emacs)
-              ;; (evil-emacs-state)
-              (check-evil-mode)
-              (local-set-key (kbd "C-c C-'") 'org-edit-src-exit)
-              (local-set-key (kbd "C-c C-x C-f") 'org-footnote-action)
-              (delete-other-windows)))
+  (defun my-org-src-mode-hooks ()
+    (interactive)
+    (check-evil-mode)
+    (local-set-key (kbd "C-c C-'") 'org-edit-src-exit)
+    (local-set-key (kbd "C-c C-x C-f") 'org-footnote-action)
+    (delete-other-windows))
+
+  ;; (setq org-src-mode-hook nil)
+  ;; (add-hook 'org-src-mode-hook 'my-org-src-mode-hooks)
+  ;; (add-hook 'org-src-mode-hook
+  ;;           (lambda ()
+  ;;             ;; (setq-local evil-default-state 'emacs)
+  ;;             ;; (evil-emacs-state)
+  ;;             (check-evil-mode)
+  ;;             (local-set-key (kbd "C-c C-'") 'org-edit-src-exit)
+  ;;             (local-set-key (kbd "C-c C-x C-f") 'org-footnote-action)
+  ;;             (delete-other-windows)))
+
   ;; (define-key org-src-mode-hook (kbd "C-c C-'") 'org-edit-src-exit)
 
   ;;; Enable window-numbering-mode and use M-1 through M-0 to navigate.
