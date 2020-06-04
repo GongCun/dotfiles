@@ -442,13 +442,8 @@ you should place your code here."
       (define-key org-mode-map (kbd "C-c .") nil)
       (define-key org-mode-map (kbd "C-c k") nil)
       (define-key org-mode-map (kbd "C-c C-'") 'org-edit-special)
-      ;; (define-key org-mode-map (kbd "C-c C-x C-f") 'org-footnote-action)
+      (define-key org-mode-map (kbd "C-c C-x C-f") 'org-footnote-action)
       ))
-  (add-hook 'org-src-mode-hook
-            (lambda ()
-              (delete-other-windows)
-              (local-set-key (kbd "C-c C-'") 'org-edit-src-exit)))
-  ;; (define-key org-src-mode-hook (kbd "C-c C-'") 'org-edit-src-exit)
 
   (defun check-evil-mode ()
     (let ((list minor-mode-list))
@@ -457,24 +452,16 @@ you should place your code here."
             (evil-emacs-state))
         (setq list (cdr list)))))
 
-  (defun my-org-src-mode-hooks ()
-    (interactive)
-    (check-evil-mode)
-    (local-set-key (kbd "C-c C-'") 'org-edit-src-exit)
-    (local-set-key (kbd "C-c C-x C-f") 'org-footnote-action)
-    (delete-other-windows))
-
   ;; (setq org-src-mode-hook nil)
-  ;; (add-hook 'org-src-mode-hook 'my-org-src-mode-hooks)
-  ;; (add-hook 'org-src-mode-hook
-  ;;           (lambda ()
-  ;;             ;; (setq-local evil-default-state 'emacs)
-  ;;             ;; (evil-emacs-state)
-  ;;             (check-evil-mode)
-  ;;             (local-set-key (kbd "C-c C-'") 'org-edit-src-exit)
-  ;;             (local-set-key (kbd "C-c C-x C-f") 'org-footnote-action)
-  ;;             (delete-other-windows)))
-
+  (add-hook 'org-src-mode-hook
+            (lambda ()
+              ;; (setq-local evil-default-state 'emacs)
+              ;; (evil-emacs-state)
+              (delete-other-windows)
+              (local-set-key (kbd "C-c C-'") 'org-edit-src-exit)
+              (check-evil-mode)
+              ;; (local-set-key (kbd "C-c C-x C-f") 'org-footnote-action)
+              ))
   ;; (define-key org-src-mode-hook (kbd "C-c C-'") 'org-edit-src-exit)
 
   ;;; Enable window-numbering-mode and use M-1 through M-0 to navigate.
@@ -501,17 +488,6 @@ you should place your code here."
 
   ;;;
   (add-hook 'emacs-lisp-mode-hook 'hungry-delete-mode)
-
-  ;; ;;; c-mode-hook
-  ;; (add-hook 'c-mode-hook
-  ;;           (lambda ()
-  ;;             (c-set-style "linux")
-  ;;             (flyspell-prog-mode)
-  ;;             (turn-on-auto-fill)
-  ;;             (c-toggle-auto-state 1)
-  ;;             (c-toggle-auto-newline 1)
-  ;;             (c-toggle-hungry-state 1)
-  ;;             ))
 
   ;;;
   )
