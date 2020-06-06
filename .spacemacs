@@ -452,7 +452,7 @@ you should place your code here."
       (define-key org-mode-map (kbd "C-c .") nil)
       (define-key org-mode-map (kbd "C-c k") nil)
       (define-key org-mode-map (kbd "C-c C-'") 'org-edit-special)
-      ;; (define-key org-mode-map (kbd "C-c C-x C-f") (kbd "C-c C-x f"))
+      (define-key org-mode-map (kbd "C-c C-x C-f") (kbd "C-c C-x f"))
       ))
 
   (defun check-evil-mode ()
@@ -466,10 +466,11 @@ you should place your code here."
             (lambda ()
               ;; (setq-local evil-default-state 'emacs)
               ;; (evil-emacs-state)
-              (check-evil-mode)
+              (delete-other-windows)
               (local-set-key (kbd "C-c C-'") 'org-edit-src-exit)
-              (local-set-key (kbd "C-c C-x C-f") 'org-footnote-action)
-              (delete-other-windows)))
+              (check-evil-mode)
+              ;; (local-set-key (kbd "C-c C-x C-f") 'org-footnote-action)
+              ))
   ;; (define-key org-src-mode-hook (kbd "C-c C-'") 'org-edit-src-exit)
 
   ;;; remove whitespace-mode
@@ -501,13 +502,17 @@ you should place your code here."
  '(c-electric-pound-behavior (quote (alignleft)))
  '(c-mode-hook
    (quote
-    (macrostep-c-mode-hook set-c-toggle-hungry-state
-                           (lambda nil
-                             (c-set-style "linux")
-                             (flyspell-prog-mode)
-                             (turn-on-auto-fill)
-                             (c-toggle-auto-state 1)
-                             (c-toggle-auto-newline 1)))))
+    (er/add-cc-mode-expansions macrostep-c-mode-hook set-c-toggle-hungry-state
+                               (lambda nil
+                                 (c-set-style "linux")
+                                 (flyspell-prog-mode)
+                                 (turn-on-auto-fill)
+                                 (c-toggle-auto-state 1)
+                                 (c-toggle-auto-newline 1))
+                               (lambda nil
+                                 (c-set-offset
+                                  (quote substatement-open)
+                                  0)))))
  '(desktop-save-mode t)
  '(diff-mode-hook (quote (spacemacs//set-whitespace-style-for-diff)))
  '(evil-want-C-d-scroll nil)
