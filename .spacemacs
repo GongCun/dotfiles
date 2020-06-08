@@ -490,6 +490,15 @@ you should place your code here."
   (add-hook 'emacs-lisp-mode-hook 'hungry-delete-mode)
 
   ;;;
+
+  (defun create-tags (dir-name)
+    "Create tags file."
+    (interactive "DDirectory: ")
+    (let ((path-to-etags "c:/Program' 'Files/emacs-25.3_1-x86_64/bin/etags.exe"))
+      (shell-command
+       (format "find %s -type f -name \"*.[ch]\" | %s -" (directory-file-name dir-name) path-to-etags))))
+  ;; (add-to-list 'exec-path "etags") seems not take effect
+
   (add-hook 'c-mode-hook (lambda ()
                            (local-set-key (kbd "M-*") 'pop-tag-mark)))
 
@@ -523,6 +532,9 @@ you should place your code here."
  '(evil-want-C-u-scroll nil)
  '(evil-want-C-w-delete nil)
  '(evil-want-Y-yank-to-eol nil)
+ '(exec-path
+   (quote
+    ("c:/Program Files (x86)/PuTTY" "c:/cygwin64/bin" "c:/Program Files (x86)/Common Files/Oracle/Java/javapath" "C:/ActiveTcl/bin" "C:/Program Files/ImageMagick-7.0.8-Q16" "C:/Program Files (x86)/Common Files/NetSarang" "C:/Program Files (x86)/Intel/iCLS Client/" "C:/Program Files/Intel/iCLS Client/" "C:/windows/system32" "C:/windows" "C:/windows/System32/Wbem" "C:/windows/System32/WindowsPowerShell/v1.0/" "C:/Program Files (x86)/QuickTime/QTSystem/" "C:/Program Files/Intel/Intel(R) Management Engine Components/DAL" "C:/Program Files/Intel/Intel(R) Management Engine Components/IPT" "C:/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL" "C:/Program Files (x86)/Intel/Intel(R) Management Engine Components/IPT" "C:/Program Files (x86)/Intel/OpenCL SDK/3.0/bin/x86" "C:/Program Files (x86)/Intel/OpenCL SDK/3.0/bin/x64" "C:/PROGRA~1/SQLLIB/BIN" "C:/PROGRA~1/SQLLIB/FUNCTION" "C:/Program Files (x86)/IBM/Personal Communications/" "C:/Program Files (x86)/IBM/Trace Facility/" "C:/Program Files/Microsoft/Web Platform Installer/" "C:/Program Files (x86)/Microsoft ASP.NET/ASP.NET Web Pages/v1.0/" "C:/Program Files/Microsoft SQL Server/110/Tools/Binn/" "C:/Program Files/Git/cmd" "C:/Program Files/multimarkdown_5.3.0/bin" "C:/Program Files (x86)/libxml2-2.7.8.win32/bin" "C:/Program Files (x86)/GnuWin32/bin" "C:/Program Files/Git/mingw64/bin" "C:/Program Files/MiKTeX 2.9/miktex/bin/x64/" "C:/Program Files (x86)/aspell/bin" "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/" "C:/Program Files (x86)/Microsoft SDKs/TypeScript/1.0/" "C:/Program Files/Microsoft SQL Server/120/Tools/Binn/" "C:/Program Files/Nmap" "C:/Program Files (x86)/Huawei/HUAWEI DSM/DSM Client" "C:/Program Files (x86)/GnuWin32/bin" "C:/Program Files (x86)/PuTTY" "C:/Program Files (x86)/Nmap" "c:/Program Files/emacs-25.3_1-x86_64/libexec/emacs/25.3/x86_64-w64-mingw32" "C:/Program Files/emacs-25.3_1-x86_64/bin")))
  '(indent-tabs-mode t)
  '(ispell-dictionary "english")
  '(org-agenda-files (quote ("c:/Work/plan/plan.org")))
