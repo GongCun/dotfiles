@@ -488,6 +488,17 @@ you should place your code here."
   (add-hook 'emacs-lisp-mode-hook 'hungry-delete-mode)
 
   ;;;
+  (defun create-tags (dir-name)
+    "Create tags file."
+    (interactive "DDirectory: ")
+    (let ((path-to-etags "c:/Program' 'Files/emacs-25.3_1-x86_64/bin/etags.exe"))
+      (shell-command
+       (format "find %s -type f -name \"*.[ch]\" | %s -" (directory-file-name dir-name) path-to-etags))))
+  ;; (add-to-list 'exec-path "etags") seems not take effect
+
+  (add-hook 'c-mode-hook (lambda ()
+                           (local-set-key (kbd "M-*") 'pop-tag-mark)))
+  ;;;
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -519,6 +530,9 @@ you should place your code here."
  '(evil-want-C-u-scroll nil)
  '(evil-want-C-w-delete nil)
  '(evil-want-Y-yank-to-eol nil)
+ '(exec-path
+   (quote
+    ("c:/cygwin64/bin" "c:/Program Files (x86)/Common Files/NetSarang" "C:/Program Files (x86)/Common Files/Oracle/Java/javapath" "C:/Program Files/ImageMagick-7.0.8-Q16" "C:/ProgramData/Oracle/Java/javapath" "C:/Windows/system32" "C:/Windows" "C:/Windows/System32/Wbem" "C:/Windows/System32/WindowsPowerShell/v1.0/" "C:/Program Files/PuTTY/" "C:/Program Files/Git/cmd" "C:/Program Files/MiKTeX 2.9/miktex/bin/x64/" "C:/Program Files/Microsoft Windows Performance Toolkit/" "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/" "C:/Program Files/Microsoft SQL Server/110/Tools/Binn/" "C:/Program Files (x86)/Microsoft SDKs/TypeScript/1.0/" "C:/Program Files/Microsoft SQL Server/120/Tools/Binn/" "C:/Program Files/CMake/bin" "C:/Program Files (x86)/GnuWin32/bin" "C:/Program Files/Intel/WiFi/bin/" "C:/Program Files/Common Files/Intel/WirelessCommon/" "C:/Program Files (x86)/Aspell/bin" "C:/Program Files (x86)/MultiMarkdown 5.3.0/bin" "C:/Program Files/PuTTY" "C:/Program Files/Java/jdk1.8.0_181/bin" "C:/Program Files/emacs-25.3_1-x86_64/bin" "C:/Program Files/Intel/WiFi/bin/" "C:/Program Files/Common Files/Intel/WirelessCommon/" "C:/Program Files (x86)/Nmap" "c:/Program Files/emacs-25.3_1-x86_64/libexec/emacs/25.3/x86_64-w64-mingw32" "C:\\Program Files\\emacs-25.3_1-x86_64\\bin")))
  '(explicit-bash-args (quote ("--noediting")))
  '(org-agenda-files
    (quote
