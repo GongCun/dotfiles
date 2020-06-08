@@ -467,11 +467,32 @@ you should place your code here."
             (lambda ()
               (local-set-key "\C-cl" 'comint-clear-buffer)))
 
-  ;;; want to disable the whitespace-mode but not work. custom diff-mode-hook to
-  ;;; resolve it.
-  (defun turn-off-whitespace-mode ()
-    (whitespace-mode))
-  (add-hook 'diff-mode-hook #'turn-off-whitespace-mode)
+  ;;; remove whitespace-mode
+  (let ((i 0)
+        (len (length diff-mode-hook)))
+    (while (< i len)
+      (if (string= "whitespace-mode" (prin1-to-string (elt diff-mode-hook i)))
+          (remove-hook 'diff-mode-hook 'whitespace-mode))
+      (setq i (1+ i))))
+
+  ;;;
+  (add-hook 'after-init-hook 'global-company-mode)
+
+  ;;;
+  (add-hook 'emacs-lisp-mode-hook 'hungry-delete-mode)
+
+  ;;;
+  (defun create-tags (dir-name)
+    "Create tags file."
+    (interactive "DDirectory: ")
+    (let ((path-to-etags "/usr/bin/etags"))
+      (shell-command
+       (format "find %s -type f -name \"*.[ch]\" | %s -" (directory-file-name dir-name) path-to-etags))))
+  ;; (add-to-list 'exec-path \"etags\") seems not take effect
+
+  (add-hook 'c-mode-hook (lambda ()
+                           (local-set-key (kbd "M-*") 'pop-tag-mark)))
+
   ;;;
   )
 
@@ -485,6 +506,22 @@ you should place your code here."
  '(Man-notify-method (quote pushy))
  '(ansi-color-names-vector
    ["#080808" "#d70000" "#67b11d" "#875f00" "#268bd2" "#af00df" "#00ffff" "#b2b2b2"])
+ '(c-mode-hook
+   (quote
+    ((lambda nil
+       (local-set-key
+        (kbd "M-*")
+        (quote pop-tag-mark)))
+     (lambda nil
+       (c-set-style "linux")
+       (flyspell-prog-mode)
+       (turn-on-auto-fill)
+       (c-toggle-auto-state 1)
+       (c-toggle-auto-newline 1)
+       (c-toggle-hungry-state 1)
+       (c-set-offset
+        (quote substatement-open)
+        0)))))
  '(diff-mode-hook (quote (spacemacs//set-whitespace-style-for-diff)))
  '(display-line-numbers-type (quote relative))
  '(evil-want-C-d-scroll nil)
