@@ -490,6 +490,10 @@ you should place your code here."
   (add-hook 'emacs-lisp-mode-hook 'hungry-delete-mode)
 
   ;;;
+  (add-hook 'c-mode-hook (lambda ()
+                           (local-set-key (kbd "M-*") 'pop-tag-mark)))
+
+  ;;;
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -509,7 +513,10 @@ you should place your code here."
        (turn-on-auto-fill)
        (c-toggle-auto-state 1)
        (c-toggle-auto-newline 1)
-       (c-toggle-hungry-state 1)))))
+       (c-toggle-hungry-state 1)
+       (c-set-offset
+        (quote substatement-open)
+        0)))))
  '(desktop-save-mode t)
  '(diff-mode-hook (quote (spacemacs//set-whitespace-style-for-diff)))
  '(evil-want-C-d-scroll nil)
