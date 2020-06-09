@@ -420,6 +420,7 @@ you should place your code here."
       (define-key (eval map) "\C-k" nil)
       (define-key (eval map) "\C-n" nil)
       (define-key (eval map) "\C-p" nil)
+      (define-key (eval map) "\C-r" nil)
       (define-key (eval map) "\C-w" 'kill-ring-save)
       (define-key (eval map) "\C-y" nil)))
 
