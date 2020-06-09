@@ -492,7 +492,11 @@ you should place your code here."
   ;; (add-to-list 'exec-path \"etags\") seems not take effect
 
   (add-hook 'c-mode-hook (lambda ()
-                           (local-set-key (kbd "M-*") 'pop-tag-mark)))
+                           ;;; M-, (pop-tag-mark)
+                           (local-set-key (kbd "M-*") 'find-tag-other-window)
+                           (local-set-key (kbd "M-t") 'find-tag)
+                           ;; (local-set-key (kbd "M-*") (kbd "C-x 4 ."))
+                           ))
 
   ;;;
   )
@@ -512,7 +516,10 @@ you should place your code here."
     ((lambda nil
        (local-set-key
         (kbd "M-*")
-        (quote pop-tag-mark)))
+        (quote find-tag-other-window))
+       (local-set-key
+        (kbd "M-t")
+        (quote find-tag)))
      (lambda nil
        (c-set-style "linux")
        (flyspell-prog-mode)
