@@ -453,7 +453,7 @@ you should place your code here."
       (define-key org-mode-map (kbd "C-c .") nil)
       (define-key org-mode-map (kbd "C-c k") nil)
       (define-key org-mode-map (kbd "C-c C-'") 'org-edit-special)
-      (define-key org-mode-map (kbd "C-c C-x C-f") (kbd "C-c C-x f"))
+      (define-key org-mode-map (kbd "C-c C-x C-f") 'org-footnote-action)
       ))
 
   (defun check-evil-mode ()
@@ -498,7 +498,11 @@ you should place your code here."
   ;; (add-to-list 'exec-path "etags") seems not take effect
 
   (add-hook 'c-mode-hook (lambda ()
-                           (local-set-key (kbd "M-*") 'pop-tag-mark)))
+                           ;;; "M-," is (pop-tag-mark)
+                           ;; (local-set-key (kbd "M-*") 'pop-tag-mark)
+                           (local-set-key (kbd "M-*") 'find-tag-other-window)
+                           (local-set-key (kbd "M-t") 'find-tag)
+                           ))
   ;;;
   )
 
@@ -514,17 +518,17 @@ you should place your code here."
  '(c-electric-pound-behavior (quote (alignleft)))
  '(c-mode-hook
    (quote
-    (er/add-cc-mode-expansions macrostep-c-mode-hook set-c-toggle-hungry-state
-                               (lambda nil
-                                 (c-set-style "linux")
-                                 (flyspell-prog-mode)
-                                 (turn-on-auto-fill)
-                                 (c-toggle-auto-state 1)
-                                 (c-toggle-auto-newline 1))
-                               (lambda nil
-                                 (c-set-offset
-                                  (quote substatement-open)
-                                  0)))))
+    ((lambda nil
+       (local-set-key
+        (kbd "M-*")
+        (quote find-tag-other-window))
+       (local-set-key
+        (kbd "M-t")
+        (quote find-tag)))
+     (lambda nil
+       (c-set-offset
+        (quote substatement-open)
+        0)))))
  '(desktop-save-mode t)
  '(diff-mode-hook (quote (spacemacs//set-whitespace-style-for-diff)))
  '(evil-want-C-d-scroll nil)
