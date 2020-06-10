@@ -547,6 +547,8 @@ you should place your code here."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:background nil))))
+ '(font-lock-comment-delimiter-face ((t (:foreground "color-184"))))
+ '(font-lock-comment-face ((t (:foreground "color-184"))))
  '(highlight ((t (:foreground "nil"))))
  '(hl-line ((t (:background "#1c1c1c"))))
  '(linum ((t (:background "#1c1c1c" :foreground "color-243")))))
