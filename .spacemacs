@@ -503,6 +503,17 @@ you should place your code here."
                            (local-set-key (kbd "M-*") 'find-tag-other-window)
                            (local-set-key (kbd "M-t") 'find-tag)
                            ))
+
+  (defun my-c-mode-hook ()
+                (c-set-style "linux")
+                (flyspell-prog-mode)
+                (turn-on-auto-fill)
+                (c-toggle-auto-state 1)
+                (c-toggle-auto-newline 1)
+                (c-toggle-hungry-state 1))
+
+  (add-hook 'c-mode-hook #'my-c-mode-hook)
+
   ;;;
   )
 
