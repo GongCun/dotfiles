@@ -133,7 +133,7 @@ Subdirectory `bin' should have file `bin/bash.exe'."
                                          'unix))
 
 ;;; Use /dev/null, not NUL.
-(setq null-device  "/dev/null")
+;; (setq null-device  "/dev/null")
 
 ;;; Without this env var setting, Cygwin causes `ediff-buffers', at least, to raise an error.
 ;;; Making this setting here might have no effect, as the env var is checked only by the first Cygwin process
