@@ -322,13 +322,17 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
   ;;; from:
   ;;; http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html
+  ;;; https://www.reddit.com/r/emacs/comments/dgj0ae/tutorial_spellchecking_with_hunspell_170_for/
   ;; (setq ispell-program-name
         ;; (locate-file "hunspell" exec-path exec-suffixes 'file-executable-p))
   ;; (setq ispell-dictionary "english")
+
   (cond
    ((executable-find "hunspell")
     (setq ispell-program-name "hunspell")
     (setq ispell-local-dictionary "en_US")
+    (setq ispell-hunspell-dict-paths-alist
+          '(("en_US" "C:/Program Files/hunspell/dict/en_US.aff")))
     (setq ispell-local-dictionary-alist
           ;; Please note the list `("-d" "en_US")` contains ACTUAL parameters passed to hunspell
           ;; You could use `("-d" "en_US,en_US-med")` to check with multiple dictionaries
@@ -594,4 +598,10 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:background "#303347" :foreground "#e5e5e5"))))
+ '(company-tooltip-common ((((class color) (min-colors 89)) (:background "#5f5f5f" :foreground "#5fafd7"))))
+ '(company-tooltip-common-selection ((((class color) (min-colors 89)) (:background "#767676" :foreground "#afd7ff" :bold t))))
+ '(font-lock-comment-delimiter-face ((t (:foreground "#b2b2b2" :slant italic))))
+ '(font-lock-comment-face ((((class color) (min-colors 89)) (:foreground "#b2b2b2" :slant italic))))
+ '(font-lock-constant-face ((t (:foreground "forest green" :slant italic :weight bold))))
  '(sh-heredoc ((t (:foreground "medium sea green" :weight bold)))))
