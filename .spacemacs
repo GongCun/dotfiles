@@ -491,12 +491,24 @@ you should place your code here."
        (format "find %s -type f -name \"*.[ch]\" | %s -" (directory-file-name dir-name) path-to-etags))))
   ;; (add-to-list 'exec-path \"etags\") seems not take effect
 
-  (add-hook 'c-mode-hook (lambda ()
-                           ;;; M-, (pop-tag-mark)
-                           (local-set-key (kbd "M-*") 'find-tag-other-window)
-                           (local-set-key (kbd "M-t") 'find-tag)
-                           ;; (local-set-key (kbd "M-*") (kbd "C-x 4 ."))
-                           ))
+  (defun set-c-toggle-auto-newline ()
+    (c-toggle-auto-newline 1))
+  (add-hook 'c-mode-hook 'set-c-toggle-auto-newline)
+
+  (defun set-c-toggle-hungry-state()
+    (c-toggle-hungry-state 1))
+  (add-hook 'c-mode-hook 'set-c-toggle-hungry-state)
+
+  (defun set-c-mode-other-hook ()
+                (c-set-style "linux")
+                (flyspell-prog-mode)
+                (turn-on-auto-fill)
+                (c-toggle-auto-state 1)
+                ;;; M-, (pop-tag-mark)
+                (local-set-key (kbd "M-*") 'find-tag-other-window)
+                (local-set-key (kbd "M-t") 'find-tag))
+
+  (add-hook 'c-mode-hook 'set-c-mode-other-hook)
 
   ;;;
   )
@@ -511,25 +523,7 @@ you should place your code here."
  '(Man-notify-method (quote pushy))
  '(ansi-color-names-vector
    ["#080808" "#d70000" "#67b11d" "#875f00" "#268bd2" "#af00df" "#00ffff" "#b2b2b2"])
- '(c-mode-hook
-   (quote
-    ((lambda nil
-       (local-set-key
-        (kbd "M-*")
-        (quote find-tag-other-window))
-       (local-set-key
-        (kbd "M-t")
-        (quote find-tag)))
-     (lambda nil
-       (c-set-style "linux")
-       (flyspell-prog-mode)
-       (turn-on-auto-fill)
-       (c-toggle-auto-state 1)
-       (c-toggle-auto-newline 1)
-       (c-toggle-hungry-state 1)
-       (c-set-offset
-        (quote substatement-open)
-        0)))))
+ '(c-mode-hook (quote (macrostep-c-mode-hook)))
  '(diff-mode-hook (quote (spacemacs//set-whitespace-style-for-diff)))
  '(display-line-numbers-type (quote relative))
  '(evil-want-C-d-scroll nil)
