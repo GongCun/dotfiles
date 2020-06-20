@@ -62,26 +62,13 @@
 (add-hook 'linum-mode-hook #'my-linum-mode-hook)
 ;; (global-linum-mode 1)
 
-(defun set-c-toggle-hungry-state()
-  (c-toggle-hungry-state 1))
-
-(add-hook 'c-mode-hook
-          (lambda ()
-            (c-set-style "linux")
-            (flyspell-prog-mode)
-            (turn-on-auto-fill)
-            (c-toggle-auto-state 1)
-            (c-toggle-auto-newline 0)
-            ))
-(add-hook 'c-mode-hook 'set-c-toggle-hungry-state)
-
 (add-hook 'c++-mode-hook
           (lambda ()
             (c-set-style "stroustrup")
             (flyspell-prog-mode)
             (turn-on-auto-fill)
             (c-toggle-auto-state 1)
-            (c-toggle-auto-newline 0)
+            (c-toggle-auto-newline 1)
             ))
 (add-hook 'c++-mode-hook 'set-c-toggle-hungry-state)
 
