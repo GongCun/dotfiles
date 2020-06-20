@@ -523,7 +523,9 @@ you should place your code here."
  '(Man-notify-method (quote pushy))
  '(ansi-color-names-vector
    ["#080808" "#d70000" "#67b11d" "#875f00" "#268bd2" "#af00df" "#00ffff" "#b2b2b2"])
- '(c-mode-hook (quote (macrostep-c-mode-hook)))
+ '(c-mode-hook
+   (quote
+    (set-c-mode-other-hook set-c-toggle-auto-newline set-c-toggle-hungry-state macrostep-c-mode-hook)))
  '(diff-mode-hook (quote (spacemacs//set-whitespace-style-for-diff)))
  '(display-line-numbers-type (quote relative))
  '(evil-want-C-d-scroll nil)
