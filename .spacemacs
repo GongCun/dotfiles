@@ -516,6 +516,10 @@ you should place your code here."
        (format "find %s -type f -name \"*.[ch]\" | %s -" (directory-file-name dir-name) path-to-etags))))
   ;; (add-to-list 'exec-path "etags") seems not take effect
 
+  (defun set-c-toggle-auto-newline ()
+    (c-toggle-auto-newline 1))
+  (add-hook 'c-mode-hook 'set-c-toggle-auto-newline)
+
   (add-hook 'c-mode-hook (lambda ()
                            ;;; "M-," is (pop-tag-mark)
                            ;; (local-set-key (kbd "M-*") 'pop-tag-mark)
