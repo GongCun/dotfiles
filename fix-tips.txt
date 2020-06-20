@@ -1,4 +1,10 @@
 ## fix the following error
 ## [yas] Check your `yas-snippet-dirs': c:/path/of/.emacs.d/elpa/yasnippet-20200524.2215/snippets is not a directory
 
+solution:
 copy C:\path\of\.emacs.d\layers\+completion\auto-completion\local\snippets to C:\path\of\.emacs.d\elpa\yasnippet-20200524.2215
+
+
+$ ssh -T git@github.com
+ssh_askpass: exec(/usr/lib/ssh/ssh-askpass): No such file or directory
+Host key verification failed.
