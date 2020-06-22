@@ -500,8 +500,8 @@ you should place your code here."
        (format "find %s -type f -name \"*.[ch]\" | %s -" (directory-file-name dir-name) path-to-etags))))
   ;; (add-to-list 'exec-path "etags") seems not take effect
 
-  (add-hook 'c-mode-hook (lambda ()
-                           (local-set-key (kbd "M-*") 'pop-tag-mark)))
+  ;;; "M-," is pop-tag-mark
+  (add-hook 'c-mode-hook (lambda () (local-set-key (kbd "M-*") 'find-tag-other-window)))
 
   ;;;
   )
@@ -518,6 +518,10 @@ you should place your code here."
  '(c-mode-hook
    (quote
     ((lambda nil
+       (local-set-key
+        (kbd "M-*")
+        (quote find-tag-other-window)))
+     (lambda nil
        (c-set-style "linux")
        (flyspell-prog-mode)
        (turn-on-auto-fill)
