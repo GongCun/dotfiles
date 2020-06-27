@@ -443,7 +443,7 @@ you should place your code here."
   (global-set-key (kbd "C-c .") 'evil-prev-flyspell-error-save-word)
 
   ;;;
-  (spaceline-toggle-window-number-on)
+  ;;(spaceline-toggle-window-number-on)
 
   ;;; Remove key-mapping from org-mode
   (with-eval-after-load "org"
