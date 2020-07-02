@@ -461,9 +461,11 @@ you should place your code here."
               (delete-other-windows)
               (local-set-key (kbd "C-c C-'") 'org-edit-src-exit)
               (check-evil-mode)
+              (auto-fill-mode)
               ;; (local-set-key (kbd "C-c C-x C-f") 'org-footnote-action)
               ))
   ;; (define-key org-src-mode-hook (kbd "C-c C-'") 'org-edit-src-exit)
+  (add-hook 'org-src-mode-hook (lambda () (auto-fill-mode)))
 
   ;;; Enable window-numbering-mode and use M-1 through M-0 to navigate.
   (spaceline-toggle-window-number-on)
@@ -503,6 +505,11 @@ you should place your code here."
   ;;; "M-," is pop-tag-mark
   (add-hook 'c-mode-hook (lambda () (local-set-key (kbd "M-*") 'find-tag-other-window)))
 
+  (defun my-compilation-mode-hook ()
+    (delete-other-windows))
+
+  (add-hook 'compilation-mode-hook 'my-compilation-mode-hook)
+
   ;;;
   )
 
@@ -531,6 +538,7 @@ you should place your code here."
        (c-set-offset
         (quote substatement-open)
         0)))))
+ '(compilation-start-hook (quote (my-compilation-mode-hook)))
  '(desktop-save-mode t)
  '(diff-mode-hook (quote (spacemacs//set-whitespace-style-for-diff)))
  '(evil-want-C-d-scroll nil)
