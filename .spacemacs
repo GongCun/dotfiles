@@ -387,6 +387,8 @@ you should place your code here."
   (global-set-key (kbd "M-m l") 'windmove-right)
   (global-set-key (kbd "M-m u") 'winner-undo)
   (global-set-key (kbd "M-m U") 'winner-redo)
+  (global-set-key (kbd "M-m M-u") 'upcase-word)
+  (global-set-key (kbd "M-m M-d") 'downcase-word)
 
   ;;; cpoy from: https://github.com/tumashu/cnfonts
   (set-frame-font
@@ -465,7 +467,7 @@ you should place your code here."
               ;; (local-set-key (kbd "C-c C-x C-f") 'org-footnote-action)
               ))
   ;; (define-key org-src-mode-hook (kbd "C-c C-'") 'org-edit-src-exit)
-  (add-hook 'org-src-mode-hook (lambda () (auto-fill-mode)))
+  ;; (add-hook 'org-src-mode-hook (lambda () (auto-fill-mode)))
 
   ;;; Enable window-numbering-mode and use M-1 through M-0 to navigate.
   (spaceline-toggle-window-number-on)
