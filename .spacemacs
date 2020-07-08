@@ -541,6 +541,8 @@ you should place your code here."
         (quote substatement-open)
         0)))))
  '(compilation-start-hook (quote (my-compilation-mode-hook)))
+ '(desktop-auto-save-timeout 10)
+ '(desktop-load-locked-desktop t)
  '(desktop-save-mode t)
  '(diff-mode-hook (quote (spacemacs//set-whitespace-style-for-diff)))
  '(evil-want-C-d-scroll nil)
