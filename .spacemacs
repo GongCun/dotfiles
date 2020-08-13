@@ -31,6 +31,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     python
      ;;(org :variables org-reveal-note-key-char nil)
      ;;graphviz
      themes-megapack
@@ -524,6 +525,7 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(Man-notify-method (quote pushy))
  '(c-electric-pound-behavior (quote (alignleft)))
+ '(c-indent-comments-syntactically-p (quote set-from-style))
  '(c-mode-hook
    (quote
     ((lambda nil
