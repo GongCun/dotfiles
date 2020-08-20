@@ -516,6 +516,17 @@ you should place your code here."
   (add-hook 'c-mode-hook #'my-c-mode-hook)
 
   (global-set-key (kbd "C-M-q") 'fill-paragraph)
+
+  ;;; copy & delete whole buffer
+  (global-unset-key (kbd "C-x C-h"))
+  (global-set-key (kbd "C-x C-h") (lambda () (interactive)
+                                    (kill-ring-save (point-min) (point-max))
+                                    (message "copied the whole buffer")))
+  (global-unset-key (kbd "C-x M-h"))
+  (global-set-key (kbd "C-x M-h") (lambda () (interactive)
+                                    (delete-region (point-min) (point-max))
+                                    (message "deleted the whole buffer")))
+
   ;;;
   )
 
