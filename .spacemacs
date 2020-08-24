@@ -419,7 +419,7 @@ you should place your code here."
       ;; (define-key (eval map) "\C-u" nil)
       (define-key (eval map) "\C-e" nil)
       (define-key (eval map) "\C-a" nil)
-      ;; (define-key (eval map) "\C-d" nil)
+      (define-key (eval map) "\C-d" nil)
       (define-key (eval map) "\C-k" nil)
       (define-key (eval map) "\C-n" nil)
       (define-key (eval map) "\C-p" nil)
@@ -512,6 +512,15 @@ you should place your code here."
     (delete-other-windows))
 
   (add-hook 'compilation-mode-hook 'my-compilation-mode-hook)
+
+  ;;; copy the whole buffer
+  (global-unset-key (kbd "C-x C-h"))
+  (global-set-key (kbd "C-x C-h") (lambda () (interactive)
+                                    (kill-ring-save (point-min) (point-max))
+                                    (message "copy whole buffer")))
+  (global-unset-key (kbd "C-x M-h"))
+  (global-set-key (kbd "C-x M-h") (lambda () (interactive)
+                                    (delete-region (point-min) (point-max))))
 
   ;;;
   )
