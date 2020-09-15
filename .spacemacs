@@ -427,7 +427,7 @@ you should place your code here."
         ;; (define-key (eval map) "\C-u" nil)
         (define-key (eval map) "\C-e" nil)
         (define-key (eval map) "\C-a" nil)
-        ;; (define-key (eval map) "\C-d" nil)
+        (define-key (eval map) "\C-d" nil)
         (define-key (eval map) "\C-k" nil)
         (define-key (eval map) "\C-n" nil)
         (define-key (eval map) "\C-p" nil)
@@ -527,6 +527,9 @@ you should place your code here."
                                     (delete-region (point-min) (point-max))
                                     (message "deleted the whole buffer")))
 
+  ;;;
+  (global-unset-key (kbd "C-\\"))
+  (global-set-key (kbd "C-\\") 'delete-horizontal-space)
   ;;;
   )
 
